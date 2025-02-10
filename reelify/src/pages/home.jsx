@@ -1,17 +1,18 @@
-import Videogrid from "../components/videogrid";
-import Sidebar from "../layouts/side_navbar";
-import Navbar from "../layouts/top_navbar";
+import SideLayout from "../layouts/sideLayout";
+import PropTypes from "prop-types";
 
-function Home() {
+
+
+function Home({Component}) {
     return (
         <>
-            <Navbar/>
-            <div className="flex">
-                <Sidebar/>
-                <Videogrid/>
-            </div>
+            <SideLayout Component={Component}/>
         </>
     )
 }
+
+Home.propTypes = {
+    Component: PropTypes.elementType.isRequired,
+  };
 
 export default Home;

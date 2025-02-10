@@ -9,6 +9,7 @@ function Videogrid() {
       uploadTime: "10",
       ChannelName: "Shrage",
       title: "Damru",
+      _id : "1312432345234"
     },
     {
       src: "assets/thumbnails/t2.png",
@@ -16,6 +17,7 @@ function Videogrid() {
       uploadTime: "20",
       ChannelName: "Shrage",
       title: "Damru 2",
+      _id : "1312432345234"
     },
     {
       src: "assets/thumbnails/t3.png",
@@ -23,6 +25,7 @@ function Videogrid() {
       uploadTime: "30",
       ChannelName: "Shrage",
       title: "NST",
+      _id : "1312432345234"
     },
     {
       src: "assets/thumbnails/t4.png",
@@ -30,6 +33,7 @@ function Videogrid() {
       uploadTime: "20",
       ChannelName: "Shrage",
       title: "Haridwar",
+      _id : "1312432345234"
     },
     {
       src: "assets/thumbnails/t5.png",
@@ -37,6 +41,7 @@ function Videogrid() {
       uploadTime: "50",
       ChannelName: "Shrage",
       title: "Haridwar 2",
+      _id : "1312432345234"
     },
     {
       src: "assets/thumbnails/t5.png",
@@ -44,6 +49,7 @@ function Videogrid() {
       uploadTime: "50",
       ChannelName: "Shrage",
       title: "Haridwar 2",
+      _id : "1312432345234"
     },
     {
       src: "assets/thumbnails/t1.png",
@@ -51,6 +57,7 @@ function Videogrid() {
       uploadTime: "10",
       ChannelName: "Shrage",
       title: "Damru",
+      _id : "1312432345234"
     },
     {
       src: "assets/thumbnails/t2.png",
@@ -58,6 +65,7 @@ function Videogrid() {
       uploadTime: "20",
       ChannelName: "Shrage",
       title: "Damru 2",
+      _id : "1312432345234"
     },
     {
       src: "assets/thumbnails/t3.png",
@@ -65,6 +73,7 @@ function Videogrid() {
       uploadTime: "30",
       ChannelName: "Shrage",
       title: "NST",
+      _id : "1312432345234"
     },
     {
       src: "assets/thumbnails/t4.png",
@@ -79,6 +88,7 @@ function Videogrid() {
       uploadTime: "50",
       ChannelName: "Shrage",
       title: "Haridwar 2",
+      _id : "1312432345234"
     },
     {
       src: "assets/thumbnails/t5.png",
@@ -86,6 +96,7 @@ function Videogrid() {
       uploadTime: "50",
       ChannelName: "Shrage",
       title: "Haridwar 2",
+      _id : "1312432345234"
     },
   ];
 
@@ -93,6 +104,10 @@ function Videogrid() {
 
   const openChannel = (path) => {
     navigate(`/user/${path}`)
+  }
+
+  const openVideo = (_id) => {
+    navigate(`/playVideo/${_id}`)
   }
 
   return (
@@ -111,7 +126,7 @@ function Videogrid() {
             return (
               <>
                 <div className="h-[200px] w-[260px] text-white py-2 mb-[20px]">
-                  <div>
+                  <div onClick={() => {openVideo(video._id)}} className='cursor-pointer'>
                     <img src={video.src} className="px-4 " />
                   </div>
                   <div className="px-4 text-xl text-primary">
