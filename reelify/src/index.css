@@ -4,10 +4,10 @@
     --color-primary : #A7D129;
     --color-secondary : #616F39;
     --color-highlight : #3E432E ;
-
 }
 
 
 body {
     background-color: black;
+    overflow: hidden;
 }

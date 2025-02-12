@@ -1,11 +1,18 @@
 import {BrowserRouter,Routes,Route} from 'react-router-dom'
-import Home from './pages/home'
 import Channelview from './pages/channelview'
-import Navbar from './layouts/top_navbar'
-import Videogrid from './components/videogrid'
+import Navbar from './components/top_navbar'
 import StreamLayout from './layouts/streamLayout'
 import Login from './pages/login'
 import SignUp from './pages/Signup'
+import SideLayout from './layouts/sideLayout'
+import Homegrid from './components/homeGrid'
+import SubscriptionGrid from './components/subsgrid'
+import SavedVideosGrid from './components/savedgrid'
+import WatchHistoryGrid from './components/historygrid'
+import MyVideoGrid from './components/myvideogrid'
+import Settings from './components/settings'
+import About from './components/channelAbout'
+import Playlist from './components/channelPlaylist'
 
 function App() {
   
@@ -16,12 +23,19 @@ function App() {
       <BrowserRouter>
       <Navbar/>
         <Routes>
-          <Route path='' element={<Home Component={Videogrid}/>}></Route>
-          <Route path='/user/:id' element={<Channelview/>}></Route>
-          <Route path='/playVideo/:id' element={<StreamLayout/>}></Route>
-          <Route path='/signup' element ={<Home Component={SignUp}/>}></Route>
-          <Route path='/login' element ={<Home Component={Login}/>}></Route>
-          <Route></Route>
+          <Route path='' element={<SideLayout Component={Homegrid} childComponent= {{showChannelName : true}}/>}/>
+          <Route path='/subscriptions' element={<SideLayout Component={SubscriptionGrid}/>}/>
+          <Route path='/SavedVideos' element={<SideLayout Component={SavedVideosGrid}/>}/>
+          <Route path='/watchHistory' element={<SideLayout Component={WatchHistoryGrid}/>}/>
+          <Route path='/mychannel' element={<SideLayout Component={MyVideoGrid}/>}/>
+          <Route path='/settings' element={<SideLayout Component={Settings}/>}/>
+          <Route path='/user/:id/' element={<SideLayout Component={Channelview} childComponent = {Homegrid}/>}/>
+          <Route path='/user/:id/playlist' element={<SideLayout Component={Channelview} childComponent = {Playlist}/>}/>
+          <Route path='/user/:id/about' element={<SideLayout Component={Channelview} childComponent = {About}/>}/>
+          <Route path='/playVideo/:id' element={<StreamLayout/>}/>
+          <Route path='/signup' element ={<SideLayout Component={SignUp}/>}/>
+          <Route path='/login' element ={<SideLayout Component={Login}/>}/>
+          <Route/>
         </Routes>
       </BrowserRouter>
     </>

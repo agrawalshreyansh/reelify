@@ -5,16 +5,22 @@ function Navbar() {
   const navigate = useNavigate()
 
   const loginStatus = () => {
-      navigate('/signup')
+      navigate('/login')
   }
+
+  const goHome = () => {
+    navigate('/')
+  }
+
+
 
   return (
     <div className="flex items-center justify-center h-[8vh]">
       <div>
         <img src="../assets/menu.png" className="h-5 w-6 ml-8"/>
       </div>
-      <div className="flex mr-auto items-center justify-center">
-        <img src="assets/logo.png" alt="Logo" className="h-10 w-11 ml-8" />
+      <div className="flex mr-auto items-center justify-center cursor-pointer" onClick={() => goHome()}>
+        <img src="../assets/logo.png" alt="Logo" className="h-10 w-11 ml-4" />
         <p className="text-primary text-2xl">Reelify</p>
       </div>
       <div>
