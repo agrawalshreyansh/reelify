@@ -1,3 +1,5 @@
+
+
 import {useNavigate} from 'react-router-dom';
 import PropTypes from "prop-types";
 
@@ -114,15 +116,14 @@ function Homegrid({showChannelName}) {
 
   return (
     <>
-      <div className="w-[85vw] h-[92vh] flex py-4 justify-center items-center ">
-        <div
-          className="flex flex-wrap max-h-[98%] w-[98%]"
-        >
+      <div className="w-[85vw] h-[92vh] flex py-4 px-3 justify-center items-center ">
+      <div className="grid grid-cols-1 gap-0 max-h-[100%] sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+
           {data.map((video) => {
             return (
               <>
-                <div className="h-58 w-78 text-white py-2 mb-[20px] cursor-pointer">
-                  <div onClick={() => {openVideo(video._id)}} className='px-4'>
+                <div className="text-white py-2 pb-2 cursor-pointer">
+                  <div onClick={() => {openVideo(video._id)}} className='px-2.5'>
                     <img src={video.src} className=" object-cover rounded-2xl" />
                   </div>
                   <div className="px-4 text-xl text-primary">
@@ -152,3 +153,6 @@ Homegrid.propTypes = {
 };
 
 export default Homegrid;
+
+
+

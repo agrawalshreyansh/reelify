@@ -36,11 +36,11 @@ const Channelview = ({ Component = "videos" }) => {
         <img src={data.coverImage} className="rounded-2xl" />
       </div>
 
-      <div className="flex -mt-[6vw] px-12 w-[85vw] text-sm h-54">
-        <div className="w-[18%]">
+      <div className="flex -mt-[20vw] xl:-mt-[6vw] lg:-mt-[8vw] md:-mt-[12vw]  px-12 w-[85vw] sm:-mt-[16vw] text-sm h-54">
+        <div className="w-[50%] sm:w-[18%]">
           <img
             src={data.avatar}
-            className="rounded-full border-2 border-highlight w-[100%]"
+            className="rounded-full border-2 border-highlight w-[100%] "
           />
         </div>
         <div className="text-white flex flex-col justify-end w-[30%] px-8 mb-10">
