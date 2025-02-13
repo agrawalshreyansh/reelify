@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom"
-
+import axios from "axios"
+import { useState } from "react"
 
 const SignUp = () => {
 
@@ -9,17 +10,82 @@ const SignUp = () => {
         navigate('/login')
     }
 
+    const [formData, setFormData] = useState({
+        fullname: "",
+        email: "",
+        username: "",
+        avatar: null,
+        coverImage: null,
+        password: "",
+        confirmPassword: "",
+    });
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+    };
+
+    const [file, setFiles] = useState({});
+    const handleFileChange = (e,key) => {
+        setFormData({ ...formData, [e.target.name]: e.target.files[0] });
+        setFiles(prev => ({
+            ...prev,
+            [key]: URL.createObjectURL(e.target.files[0])
+        }));
+    };
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+    
+        const formDataToSend = new FormData();
+        formDataToSend.append("fullName", formData.fullname);
+        formDataToSend.append("email", formData.email);
+        formDataToSend.append("username", formData.username);
+        formDataToSend.append("avatar", formData.avatar);
+        formDataToSend.append("coverImage", formData.coverImage);
+        formDataToSend.append("password", formData.password);
+
+    
+        axios.post("https://reelify-backend.onrender.com/api/v1/users/register", formDataToSend, {
+            headers: { "Content-Type": "multipart/form-data" },
+        })
+        .then(response => {
+
+            localStorage.setItem("fullName",response.data.fullName)
+            localStorage.setItem("coverImage",response.data.coverImage)
+            localStorage.setItem("avatar",response.data.avatar)
+            localStorage.setItem("username",response.data.username)
+            localStorage.setItem("email",response.data.email)
+            localStorage.setItem("userId",response.data._id)
+
+            navigate('/')
+        })
+        .catch(error => {
+            if (error.response) {
+                console.error("Server Error:", error.response.data);
+            } else if (error.request) {
+                console.error("No response received:", error.request);
+            } else {
+                console.error("Request Setup Error:", error.message);
+            }
+        });
+        
+    };
+    
+
+
     return (
         <div >
             <div className="flex items-center justify-center flex-col py-4">
-                <div className="flex flex-col w-[48vw] my-6 mx-20 px-36 py-12 bg-white/10 shadow-lg shadow-[rgba(31,38,135,0.37)] backdrop-blur-[4.5px] rounded-[10px] border border-white/18 ">
+                <form className="flex flex-col w-[48vw] my-6 mx-20 px-36 py-12 bg-white/10 shadow-lg shadow-[rgba(31,38,135,0.37)] backdrop-blur-[4.5px] rounded-[10px] border border-white/18 ">
                     <div className="flex flex-col h-20 justify-center ">
                         <label htmlFor="fullname" className="text-white">Full Name</label>
                         <input
                             placeholder="Name"
                             type="text"
-                            name="fullname"
                             className="border-2 border-primary text-white p-2 rounded-xl"
+                            name="fullname"
+                            value={formData.fullname}
+                            onChange={(e) => {handleChange(e,'file1')}}
                         />
                     </div>
                     <div className="flex flex-col h-20 justify-center">
@@ -27,16 +93,21 @@ const SignUp = () => {
                         <input
                             placeholder="Name"
                             type="text"
-                            name="fullname"
+                            name="email"
+                            value={formData.email}
+                            onChange= {handleChange}
                             className="border-2 border-primary text-white p-2 rounded-xl"
                         />
                     </div>
                     <div className="flex flex-col h-20 justify-center">
-                        <label htmlFor="fullname" className="text-white">Username</label>
+                        <label htmlFor="username" className="text-white">Username</label>
                         <input
                             placeholder="Name"
                             type="text"
-                            name="fullname"
+                            name="username"
+                            value={formData.username}
+                            onChange={handleChange}
+                            autoComplete="username"
                             className="border-2 border-primary text-white p-2 rounded-xl"
                         />
                     </div>
@@ -45,35 +116,36 @@ const SignUp = () => {
                         <input
                             placeholder="Name"
                             type="file"
-                            name="fullname"
+                            name="avatar"
+                            onChange={(e) => {handleFileChange(e,'file1')}}
+                            
+                            accept=".png, .jpg, .jpeg .heic .gif"
                             className="border-2 border-primary text-white w-24 px-2"
                         />
+                        {file.file1 && <img src={file.file1} className="w-48 mt-2"/>}
                     </div>
                     <div className="flex flex-col justify-center my-4">
                         <label htmlFor="fullname" className="text-white">CoverImage</label>
                         <input
                             placeholder="Name"
                             type="file"
-                            name="fullname"
+                            name="coverImage"
+                            onChange={(e) => handleFileChange(e,'file2')}
+                            accept=".png, .jpg, .jpeg .heic .gif"
                             className="border-2 border-primary text-white w-24 px-2"
                         />
+                        {file.file2 && <img src={file.file2} className="w-48 mt-2"/>}
                     </div>
                     <div className="flex flex-col h-20 justify-center">
                         <label htmlFor="fullname" className="text-white">Password</label>
                         <input
                             placeholder="Name"
                             type="password"
-                            name="fullname"
+                            name="password"
+                            value={formData.password}
+                            onChange={handleChange}
                             className="border-2 border-primary text-white p-2 rounded-xl"
-                        />
-                    </div>
-                    <div className="flex flex-col h-20 justify-center">
-                        <label htmlFor="fullname" className="text-white">Confirm Password</label>
-                        <input
-                            placeholder="Name"
-                            type="password"
-                            name="fullname"
-                            className="border-2 border-primary text-white p-2 rounded-xl"
+                            autoComplete="current-password"
                         />
                     </div>
                     <div className="text-primary ml-auto">
@@ -81,8 +153,13 @@ const SignUp = () => {
                     </div>
                     <div>
                     </div>
-                    <button type="submit" className="text-primary bg-highlight rounded-3xl h-10 mt-8">Sign Up</button>
-                </div>
+                    <button 
+                            type="submit" 
+                            onClick={handleSubmit} 
+                            className="text-primary bg-highlight rounded-3xl h-10 mt-8 cursor-pointer hover:bg-secondary">
+                            Sign Up
+                    </button>
+                </form>
             </div>
         </div>
     )

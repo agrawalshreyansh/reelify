@@ -1,7 +1,9 @@
+import Listview from "../layouts/listView";
+
 const WatchHistoryGrid = () => {
     return (
         <>
-            <div className="text-white">Watch History</div>
+            <Listview showDesc={true} width={"70%"}/>
         </>
     )
 }
