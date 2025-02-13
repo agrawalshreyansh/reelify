@@ -8,12 +8,12 @@ const StreamLayout = () => {
     const {id} = useParams()
     
     const data =  {
-            videoSrc : "https://res.cloudinary.com/dto71ewck/video/upload/v1739120715/green_Screen_1_wqweo7.3gp",
+            videoSrc :  "https://res.cloudinary.com/dto71ewck/video/upload/v1739474459/Happy_valentines_day_2025_14_february_status_valentine_s_day_songs_shorts_songs_status_-_Ruchira_Recipes_-_Veg_1080p_h264_qvc10a.mp4",
             videoPosterSrc : "",
             videoTitle : "",
             videoDetails: ''
         }
-    
+    //"https://res.cloudinary.com/dto71ewck/video/upload/v1739120715/green_Screen_1_wqweo7.3gp"
 
     const videoOptions = {
         type: "video",
@@ -42,7 +42,7 @@ const StreamLayout = () => {
                         dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500">
             
             <div className="flex">
-                <div className="w-[72%] h-[60%] ml-6 mt-6 flex flex-col">
+                <div className="w-[72%] h-[80vh] ml-6 mt-6 flex flex-col">
                   <Plyr source={videoOptions}
                       options={Options}  
                       />
