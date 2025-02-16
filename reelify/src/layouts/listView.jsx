@@ -75,9 +75,9 @@ const Listview = ({showDesc,width}) => {
 
             {data.map((videoData) => (
                 
-                <div className={`flex items-center mx-6 my-2 h-36 w-[${width}] text-xs`} key={videoData._id}>
+                <div className={`flex items-center mx-6 my-2 h-36 text-xs`} style={{ width }} key={videoData._id}>
                     <div className="w-[30%]">
-                        <img src={videoData.thumbnail}/>
+                        <img src={videoData.thumbnail} className="rounded-xl"/>
                     </div>
                     <div className="flex flex-col px-4 h-[100%] w-[75%] justify-center">
                         <div className="h-[20%] text-primary lg:text-xl xl:text-2xl">{videoData.title}</div>

@@ -13,13 +13,13 @@ import MyVideoGrid from './components/myvideogrid'
 import Settings from './components/settings'
 import About from './components/channelAbout'
 import Playlist from './components/channelPlaylist'
+import UploadVideo from './components/uploadVideo'
 
 function App() {
   
 
   return (
     <>
-      
       <BrowserRouter>
       <Navbar/>
         <Routes>
@@ -28,6 +28,7 @@ function App() {
           <Route path='/SavedVideos' element={<SideLayout Component={SavedVideosGrid}/>}/>
           <Route path='/watchHistory' element={<SideLayout Component={WatchHistoryGrid}/>}/>
           <Route path='/mychannel' element={<SideLayout Component={MyVideoGrid}/>}/>
+          <Route path='/upload' element={<SideLayout Component={UploadVideo}/>}/>
           <Route path='/settings' element={<SideLayout Component={Settings}/>}/>
           <Route path='/user/:id/' element={<SideLayout Component={Channelview} childComponent = {Homegrid}/>}/>
           <Route path='/user/:id/playlist' element={<SideLayout Component={Channelview} childComponent = {Playlist}/>}/>

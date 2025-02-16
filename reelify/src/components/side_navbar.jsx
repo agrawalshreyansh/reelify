@@ -31,11 +31,18 @@ function Sidebar() {
                         onClick={() => { setActive('videohistory'); navigate('/watchHistory')} }
                         >Watch History</div>
                 </div>
-                <div className="w-[100%] h-28 flex flex-col items-center justify-center border-highlight">
+                <div className="w-[100%] h-28 border-b-[1px] flex flex-col items-center justify-center border-highlight">
+                    <div className={`h-9 w-[75%] my-1 p-4 hover:bg-highlight flex items-center rounded-lg cursor-pointer 
+                        ${active === 'upload' ? 'bg-highlight' : '' }`} 
+                        onClick={() => { setActive('upload'); navigate('/upload')}}
+                        >Upload Video</div>
                     <div className={`h-9 w-[75%] my-1 p-4 hover:bg-highlight flex items-center rounded-lg cursor-pointer 
                         ${active === 'myvideos' ? 'bg-highlight' : '' }`} 
                         onClick={() => { setActive('myvideos'); navigate('/mychannel')} }
                         >My Videos</div>
+                    
+                </div>
+                <div className="w-[100%] h-28 flex flex-col items-center justify-center border-highlight">
                     <div className={`h-9 w-[75%] my-1 p-4 hover:bg-highlight flex items-center rounded-lg cursor-pointer 
                         ${active === 'settings' ? 'bg-highlight' : '' }`} 
                         onClick={() => { setActive('settings'); navigate('/settings') } }

@@ -72,7 +72,6 @@ const SignUp = () => {
     };
     
 
-
     return (
         <div >
             <div className="flex items-center justify-center flex-col py-4">

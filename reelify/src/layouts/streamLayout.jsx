@@ -8,13 +8,12 @@ const StreamLayout = () => {
     const {id} = useParams()
     
     const data =  {
-            videoSrc :  "https://res.cloudinary.com/dto71ewck/video/upload/v1739474459/Happy_valentines_day_2025_14_february_status_valentine_s_day_songs_shorts_songs_status_-_Ruchira_Recipes_-_Veg_1080p_h264_qvc10a.mp4",
+            videoSrc :  "https://res.cloudinary.com/dto71ewck/video/upload/v1739120715/green_Screen_1_wqweo7.3gp",
             videoPosterSrc : "",
             videoTitle : "",
             videoDetails: ''
         }
-    //"https://res.cloudinary.com/dto71ewck/video/upload/v1739120715/green_Screen_1_wqweo7.3gp"
-
+    
     const videoOptions = {
         type: "video",
         sources: [
@@ -41,12 +40,14 @@ const StreamLayout = () => {
                         dark:[&::-webkit-scrollbar-track]:bg-neutral-700
                         dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500">
             
-            <div className="flex">
-                <div className="w-[72%] h-[80vh] ml-6 mt-6 flex flex-col">
+            <div className="flex ">
+                <div className="w-[70%] ml-6 mt-4 flex flex-col ">
+                  <div className="border-2 /border-amber-200 rounded-3xl">
                   <Plyr source={videoOptions}
-                      options={Options}  
-                      />
-                  <div className="text-white m-4">
+                    options={Options}  
+                    />
+                    </div>
+                  <div className="text-white my-2 mx-4">
                     <div className="flex justify-between">
                       <div className="flex flex-col">
                         <div className="text-primary text-2xl">Damru fest 2024 Hurrahhhhhhhhhhh!</div>
@@ -56,34 +57,46 @@ const StreamLayout = () => {
                           <span>3 days ago</span>
                         </div>
                       </div>
-                      <div className="flex w-[17%] justify-between">
-                        <div className="flex justify-between w-[50%]">
-                          <button className="bg-primary p-2 w-10 h-10 rounded-xl"><img src="../assets/like.png"/></button>
-                          <button className="bg-primary p-2 w-10 h-10 rounded-xl rotate-180"><img src="../assets/like.png"/></button>
+                      <div className="flex w-[20%] justify-between">
+                          
+                        <div className="flex justify-between w-[42%]">
+                          <button className="bg-secondary p-2 w-10 h-10 rounded-xl"><img src="../assets/like.png"/></button>
+                          <button className="bg-secondary p-2 w-10 h-10 rounded-xl rotate-180"><img src="../assets/like.png"/></button>
                         </div>
-                        <div>
-                          <button className="bg-primary p-2 w-10 rounded-xl"><img src="../assets/save-instagram.png"/></button>
+                        <div className="flex justify-between">
+                          <button className="bg-secondary p-2 w-10 h-10 rounded-xl mr-4"><img src="../assets/share.png"/></button>
+                          <button className="bg-secondary p-2 w-10 rounded-xl"><img src="../assets/save-instagram.png"/></button>
                         </div>
                       </div>
                     </div>
                     <div className="flex justify-between m-4">
                       <div className=" flex items-center ">
-                        <img src="../assets/avatar2.png" className="w-12"/>
-                        <div className="flex flex-col justify-center w-28">
+                        <img src="../assets/avatar2.png" className="w-12 rounded-full border-2 border-primary"/>
+                        <div className="flex flex-col justify-center w-28 ml-4">
                           <p className="text-lg">Damru</p>
                           <p className="text-xs">100M subscribers</p>
                         </div>
+                        <button className="bg-highlight text-primary px-4 py-2 rounded-xl ml-16">Subscribe</button>
                       </div>
                       <div>
-                        <button className="bg-highlight text-primary px-4 py-2 rounded-xl">Subscribe</button>
                       </div>
                     </div>
+                  </div>
+                  <div className="border-1 border-secondary mx-4"></div>
+                  <div>
+                    <p>Description</p>
+                    <div>
+
+                    </div>
+                  </div>
+                  <div className="text-primary mx-4">
+                    Comments...
                   </div>
                 </div>
 
 
 
-                <div className="w-[28%] mx-2 ">
+                <div className="w-[28%] ">
                   <Listview showDesc={false} width={"50vw"} />
                 </div>
             </div>

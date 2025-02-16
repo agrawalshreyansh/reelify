@@ -5,7 +5,9 @@
     --color-secondary : #616F39;
     --color-highlight : #3E432E ;
 }
-
+.plyr{
+    border-radius:25px;
+}
 
 body {
     background-color: black;
