@@ -33,6 +33,7 @@ const SignUp = () => {
             [key]: URL.createObjectURL(e.target.files[0])
         }));
     };
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
     
@@ -46,17 +47,17 @@ const SignUp = () => {
 
     
         axios.post("https://reelify-backend.onrender.com/api/v1/users/register", formDataToSend, {
-            headers: { "Content-Type": "multipart/form-data" },
+            headers: { "Content-Type": "multipart/form-data" },    
+            withCredentials: true,  // Correct placement
         })
         .then(response => {
-
-            localStorage.setItem("fullName",response.data.fullName)
-            localStorage.setItem("coverImage",response.data.coverImage)
-            localStorage.setItem("avatar",response.data.avatar)
-            localStorage.setItem("username",response.data.username)
-            localStorage.setItem("email",response.data.email)
-            localStorage.setItem("userId",response.data._id)
-
+            localStorage.setItem("fullName", response.data.fullName)
+            localStorage.setItem("coverImage", response.data.coverImage)
+            localStorage.setItem("avatar", response.data.avatar)
+            localStorage.setItem("username", response.data.username)
+            localStorage.setItem("email", response.data.email)
+            localStorage.setItem("userId", response.data._id)
+        
             navigate('/')
         })
         .catch(error => {

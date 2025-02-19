@@ -30,7 +30,8 @@ function Navbar() {
             className="text-primary border-2 border-secondary h-10 w-[36vw] rounded-3xl p-3 focus:outline-none" />
       </div>
       <div className="flex ml-auto items-center justify-center">
-            <button className="text-secondary border-highlight mr-5 cursor-pointer" onClick={() => loginStatus()}>
+            <button className="text-secondary border-highlight mr-5 cursor-pointer flex items-center" onClick={() => loginStatus()}>
+                <span className="mr-2 text-xl text-primary">Sign in</span>
                 <img className="h-8 w-8 mr-8" src="../assets/user.png"/>
             </button>
       </div>
