@@ -11,8 +11,6 @@ import SavedVideosGrid from './components/savedgrid'
 import WatchHistoryGrid from './components/historygrid'
 import MyVideoGrid from './components/myvideogrid'
 import Settings from './components/settings'
-import About from './components/channelAbout'
-import Playlist from './components/channelPlaylist'
 import UploadVideo from './components/uploadVideo'
 
 function App() {
@@ -30,9 +28,7 @@ function App() {
           <Route path='/mychannel' element={<SideLayout Component={MyVideoGrid}/>}/>
           <Route path='/upload' element={<SideLayout Component={UploadVideo}/>}/>
           <Route path='/settings' element={<SideLayout Component={Settings}/>}/>
-          <Route path='/user/:id/' element={<SideLayout Component={Channelview} childComponent = {Homegrid}/>}/>
-          <Route path='/user/:id/playlist' element={<SideLayout Component={Channelview} childComponent = {Playlist}/>}/>
-          <Route path='/user/:id/about' element={<SideLayout Component={Channelview} childComponent = {About}/>}/>
+          <Route path='/user/:id/:tab?' element={<SideLayout Component={Channelview}/>}/>
           <Route path='/playVideo/:id' element={<StreamLayout/>}/>
           <Route path='/signup' element ={<SideLayout Component={SignUp}/>}/>
           <Route path='/login' element ={<SideLayout Component={Login}/>}/>

@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 function Homegrid({showChannelName}) {
   const data = [
     {
-      src: "../assets/thumbnails/t1.png",
+      src: "/assets/thumbnails/t1.png",
       views: "100K",
       uploadTime: "10",
       ChannelName: "Shrage",
@@ -14,7 +14,7 @@ function Homegrid({showChannelName}) {
       _id : "1312432345234"
     },
     {
-      src: "../assets/thumbnails/t2.png",
+      src: "/assets/thumbnails/t2.png",
       views: "200K",
       uploadTime: "20",
       ChannelName: "Shrage",
@@ -22,7 +22,7 @@ function Homegrid({showChannelName}) {
       _id : "1312432345234"
     },
     {
-      src: "../assets/thumbnails/t3.png",
+      src: "/assets/thumbnails/t3.png",
       views: "150K",
       uploadTime: "30",
       ChannelName: "Shrage",
@@ -30,7 +30,7 @@ function Homegrid({showChannelName}) {
       _id : "1312432345234"
     },
     {
-      src: "../assets/thumbnails/t4.png",
+      src: "/assets/thumbnails/t4.png",
       views: "300K",
       uploadTime: "20",
       ChannelName: "Shrage",
@@ -38,7 +38,7 @@ function Homegrid({showChannelName}) {
       _id : "1312432345234"
     },
     {
-      src: "../assets/thumbnails/t5.png",
+      src: "/assets/thumbnails/t5.png",
       views: "300K",
       uploadTime: "50",
       ChannelName: "Shrage",
@@ -46,7 +46,7 @@ function Homegrid({showChannelName}) {
       _id : "1312432345234"
     },
     {
-      src: "../assets/thumbnails/t5.png",
+      src: "/assets/thumbnails/t5.png",
       views: "300K",
       uploadTime: "50",
       ChannelName: "Shrage",
@@ -54,7 +54,7 @@ function Homegrid({showChannelName}) {
       _id : "1312432345234"
     },
     {
-      src: "../assets/thumbnails/t1.png",
+      src: "/assets/thumbnails/t1.png",
       views: "100K",
       uploadTime: "10",
       ChannelName: "Shrage",
@@ -62,7 +62,7 @@ function Homegrid({showChannelName}) {
       _id : "1312432345234"
     },
     {
-      src: "../assets/thumbnails/t2.png",
+      src: "/assets/thumbnails/t2.png",
       views: "200K",
       uploadTime: "20",
       ChannelName: "Shrage",
@@ -70,7 +70,7 @@ function Homegrid({showChannelName}) {
       _id : "1312432345234"
     },
     {
-      src: "../assets/thumbnails/t3.png",
+      src: "/assets/thumbnails/t3.png",
       views: "150K",
       uploadTime: "30",
       ChannelName: "Shrage",
@@ -78,14 +78,14 @@ function Homegrid({showChannelName}) {
       _id : "1312432345234"
     },
     {
-      src: "../assets/thumbnails/t4.png",
+      src: "/assets/thumbnails/t4.png",
       views: "300K",
       uploadTime: "20",
       ChannelName: "Shrage",
       title: "Haridwar",
     },
     {
-      src: "../assets/thumbnails/t5.png",
+      src: "/assets/thumbnails/t5.png",
       views: "300K",
       uploadTime: "50",
       ChannelName: "Shrage",
@@ -93,7 +93,7 @@ function Homegrid({showChannelName}) {
       _id : "1312432345234"
     },
     {
-      src: "../assets/thumbnails/t5.png",
+      src: "/assets/thumbnails/t5.png",
       views: "300K",
       uploadTime: "50",
       ChannelName: "Shrage",
