@@ -3,27 +3,56 @@ import { useState } from "react";
 
 const UploadVideo = () => {
     const [file, setFiles] = useState({});
-        const handleFileChange = (e,key) => {
-            setFiles(prev => ({
+
+        
+        const [formData, setFormData] = useState({})
+
+        const handleFileChange = (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+        
+            setFormData((prev) => ({
                 ...prev,
-                [key]: URL.createObjectURL(e.target.files[0])
+                [e.target.name]: file, 
+            }));
+        
+            setFiles((prev) => ({
+                ...prev,
+                [e.target.name]: URL.createObjectURL(file), 
             }));
         };
-
-        const [formData, setFormData] = useState({})
+        
 
         const handleChange = (e) => {
             const { name, value } = e.target;
             setFormData({ ...formData, [name]: value });
         };
 
-        const uploadData = async() => {
-            console.log(formData)
-            axios.post("https://reelify-backend.onrender.com/api/v1/videos/upload",formData, {
+        const [uploading,setUploading] = useState(false)
+
+
+
+        const uploadData = async(e) => {
+            e.preventDefault()
+            
+        
+            const formDataToSend = new FormData();
+            formDataToSend.append("title", formData.title);
+            formDataToSend.append("description", formData.description);
+            formDataToSend.append("videoFile", formData.videoFile);
+            formDataToSend.append("thumbnailFile", formData.thumbnailFile);
+
+
+
+            setUploading(true)
+            
+            axios.post("http://localhost:3000/api/v1/videos/upload",formDataToSend, {
                 headers: { "Content-Type": "multipart/form-data" },
+                withCredentials :true
             })
             .then((data) => {
                 console.log(data)
+                setUploading(false)
             })
             .catch((err) => console.log(err))
         }
@@ -61,9 +90,9 @@ const UploadVideo = () => {
                                     <input
                                         placeholder="Upload"
                                         type="file"
-                                        name="title"
+                                        name="video"
                                         className="border-2 border-primary text-white p-2 rounded-xl w-[50%] cursor-pointer"
-                                        onChange={(e) => {handleFileChange(e,'file1')}}
+                                        onChange={handleFileChange}
                                     />
                                 </div>
                                 {file.file1 && (
@@ -75,9 +104,9 @@ const UploadVideo = () => {
                                     <input
                                         placeholder="Upload"
                                         type="file"
-                                        name="title"
+                                        name="thumbnail"
                                         className="border-2 border-primary text-white p-2 rounded-xl w-[50%] cursor-pointer"
-                                        onChange={(e) => {handleFileChange(e,'file2')}}
+                                        onChange={handleFileChange}
                                     />
                                 </div>
                                 {file.file2 && <img src={file.file2} className="w-48 mt-2"/>}
@@ -87,7 +116,9 @@ const UploadVideo = () => {
                         <div className="flex items-center justify-center">
                             <button className="cursor-pointer w-[40%] text-primary bg-highlight rounded-3xl h-10 mt-8 "
                             onClick={uploadData}
+                            
                             >Upload</button>
+                            {(uploading) && (<div className="text-white">Video Uploading</div>)}
                         </div>
                     </div>
                 </div>

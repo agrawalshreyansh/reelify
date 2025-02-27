@@ -23,14 +23,16 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log(formData);
-        formData['email'] = 'shreyansh3536@gmail.com';
 
         const formDataToSend = JSON.stringify(formData)
 
         console.log(formDataToSend)
 
-        axios.post("https://reelify-backend.onrender.com/api/v1/users/login", formDataToSend, {
+        axios.post("http://localhost:3000/api/v1/users/login", formDataToSend,  {
             withCredentials: true,
+        headers: {
+            "Content-Type": "application/json", 
+        },
         })
             .then(response => {
                 console.log(response.data);
