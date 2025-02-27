@@ -12,6 +12,7 @@ import WatchHistoryGrid from './components/historygrid'
 import MyVideoGrid from './components/myvideogrid'
 import Settings from './components/settings'
 import UploadVideo from './components/uploadVideo'
+import TermsCondition from './components/policies'
 
 function App() {
   
@@ -28,6 +29,7 @@ function App() {
           <Route path='/mychannel' element={<SideLayout Component={MyVideoGrid}/>}/>
           <Route path='/upload' element={<SideLayout Component={UploadVideo}/>}/>
           <Route path='/settings' element={<SideLayout Component={Settings}/>}/>
+          <Route path='/policy' element ={<SideLayout Component={TermsCondition}/>}/>
           <Route path='/user/:id/:tab?' element={<SideLayout Component={Channelview}/>}/>
           <Route path='/playVideo/:id' element={<StreamLayout/>}/>
           <Route path='/signup' element ={<SideLayout Component={SignUp}/>}/>

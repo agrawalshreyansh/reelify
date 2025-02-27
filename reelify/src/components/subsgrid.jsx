@@ -101,10 +101,10 @@ const SubscriptionGrid = () => {
     return (
         <>
             <div className="text-white">
-                <div className="flex items-center py-4 overflow-x-scroll mx-4 border-b-2 border-b-secondary my-2">
+                <div className="flex items-center py-4 overflow-x-scroll mx-4 border-b-2 border-b-secondary">
                     {data.map((channel) => {    
                         return (    
-                    <div className="h-24 w-24 flex flex-col justify-center items-center px-4" key={channel._id}>
+                    <div className="h-28 w-24 flex flex-col justify-center items-center p-4 hover:bg-highlight cursor-pointer rounded-xl" key={channel._id}>
                         <div className="rounded-full h-18 w-18 border-2 border-secondary">
                             <img src={channel.img}/>
                         </div>

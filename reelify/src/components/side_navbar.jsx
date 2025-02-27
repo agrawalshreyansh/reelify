@@ -16,6 +16,7 @@ function Sidebar() {
         if (path === "/upload") return "upload";
         if (path === "/mychannel") return "myvideos";
         if (path === "/settings") return "settings";
+        if (path === "/policy") return "Terms"
         return "Home"; 
     };
 
@@ -62,6 +63,10 @@ function Sidebar() {
                     ${active === 'settings' ? 'bg-highlight' : '' }`} 
                     onClick={() => navigate('/settings')}
                 >Settings</div>
+                <div className={`h-9 w-[75%] my-1 p-4 hover:bg-highlight flex items-center rounded-lg cursor-pointer 
+                    ${active === 'Terms' ? 'bg-highlight' : '' }`} 
+                    onClick={() => navigate('/policy')}
+                >Privacy Policy</div>
             </div>
         </div>
     );
