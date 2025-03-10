@@ -1,5 +1,5 @@
 import Listview from "../layouts/listView";
-import Loader from '../components/loader'
+import Loader from './loader'
 import { useEffect, useState } from "react";
 import axios from 'axios'
 
