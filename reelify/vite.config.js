@@ -10,5 +10,5 @@ export default defineConfig({
   build: {
     outDir: 'dist', // Default, ensure it's correct
   },
-  base: "./", // Prevents broken paths on Vercel
+  base: "/", // Prevents broken paths on Vercel
 });
