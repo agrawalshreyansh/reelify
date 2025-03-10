@@ -3,6 +3,11 @@ import { useState, useEffect } from "react";
 import Homegrid from "../components/homeGrid";
 import About from "../components/channelAbout";
 import Playlist from "../components/channelPlaylist";
+import {
+  fetchChannelData,
+  fetchChannelVideos,
+} from "../services/fetchChannelData";
+import Loader from "../components/loader";
 
 const tabs = {
   videos: Homegrid,
@@ -13,10 +18,25 @@ const tabs = {
 const Channelview = () => {
   const { id, tab } = useParams();
   const navigate = useNavigate();
+  const [isLoading, setLoading] = useState(false);
 
   const [active, setActive] = useState(tab || "videos");
+  const [channelData, setchannelData] = useState({});
+
+  const [videosData, setVideosData] = useState([]);
 
   useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      const data = await fetchChannelData(id);
+      const videoarr = await fetchChannelVideos(id);
+      setchannelData(data);
+      setVideosData(videoarr);
+      setLoading(false);
+    };
+
+    fetchData();
+
     if (!tab) {
       navigate(`/user/${id}/videos`, { replace: true });
     } else {
@@ -26,36 +46,37 @@ const Channelview = () => {
 
   const MyComponent = tabs[active] || Homegrid;
 
-  const data = {
-    channelName: "Shrage",
-    id: id,
-    username: "agrawalshreyansh",
-    subscribers: 100,
-    subscribedTo: 100,
-    avatar: "/assets/avatar2.png",
-    coverImage: "/assets/poster.png",
-  };
-
   return (
     <div className="h-full">
       <div className="px-6 h-[44%] flex items-center justify-center">
-        <img src={data.coverImage} className="rounded-2xl" />
+        <img src={channelData.coverImage} className="rounded-2xl h-[100%]" />
       </div>
-
+      {isLoading ? 
+      <div className="flex items-center justify-center h-31">
+        <Loader/>
+      </div>
+      :
+        Object.keys(channelData).length === 0 ? 
+        <div className="text-white flex justify-center text-3xl">
+            Uh! Oh! Channel doesnt exist!
+        </div> 
+        : 
       <div className="flex -mt-[20vw] xl:-mt-[6vw] lg:-mt-[8vw] md:-mt-[12vw] px-12 w-[85vw] sm:-mt-[16vw] text-sm h-54">
         <div className="w-[50%] sm:w-[18%]">
           <img
-            src={data.avatar}
-            className="rounded-full border-2 border-highlight w-[100%]"
-          />
+            src={channelData.avatar}
+            className="rounded-full border-2 border-highlight w-[100%] h-[100%]"
+            />
         </div>
         <div className="text-white flex flex-col justify-end w-[30%] px-8 mb-10">
-          <div className="text-[1.8em] text-primary">{data.channelName}</div>
-          <div className="text-sm">@{data.username}</div>
+          <div className="text-[1.8em] text-primary">
+            {channelData.fullName}
+          </div>
+          <div className="text-sm">@{channelData.username}</div>
           <div className="text-sm">
-            <span>{data.subscribers}M subscribers</span>
+            <span>{channelData.subscribersCount} subscribers</span>
             <span> . </span>
-            <span>{data.subscribedTo} subscribed</span>
+            <span>{channelData.channelsSubscribedToCount} subscribed</span>
           </div>
         </div>
         <div className="flex flex-col justify-end ml-auto mb-8">
@@ -64,7 +85,8 @@ const Channelview = () => {
           </button>
         </div>
       </div>
-
+          }
+      
       <div className="text-white flex items-center mx-14 border-b-2 border-highlight text-xl h-12">
         {Object.keys(tabs).map((tabName) => (
           <div
@@ -82,9 +104,17 @@ const Channelview = () => {
         ))}
       </div>
 
-      <div className="mx-2 mt-4 mb-4">
-        {MyComponent && <MyComponent showChannelName={false} />}
-      </div>
+      {isLoading ? (
+        <div className="flex justify-center mx-2 my-16 items-center">
+          <Loader />
+        </div>
+      ) : (
+        <div className="mx-2 mt-4 mb-4">
+          {MyComponent && (
+            <MyComponent showChannelName={false} videos={videosData} />
+          )}
+        </div>
+      )}
     </div>
   );
 };

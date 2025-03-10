@@ -101,7 +101,7 @@ const SubscriptionGrid = () => {
     return (
         <>
             <div className="text-white">
-                <div className="flex items-center py-4 overflow-x-scroll mx-4 border-b-2 border-b-secondary">
+            <div className="flex items-center py-4 overflow-x-auto scrollbar-hide [&::-webkit-scrollbar]:hidden mx-4 border-b-2 border-b-secondary">
                     {data.map((channel) => {    
                         return (    
                     <div className="h-28 w-24 flex flex-col justify-center items-center p-4 hover:bg-highlight cursor-pointer rounded-xl" key={channel._id}>

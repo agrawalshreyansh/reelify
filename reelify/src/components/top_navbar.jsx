@@ -1,4 +1,6 @@
+import {  useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios"
 
 function Navbar() {
 
@@ -12,6 +14,46 @@ function Navbar() {
     navigate('/')
   }
 
+  const userProfile = localStorage.getItem('avatar')
+  const [avatar, setAvatar] = useState()
+
+  const [isLoggedIn, setLoggedIn] = useState(false)
+
+  const userLogOut = async () => {
+
+    
+      try {
+        const response = await axios.post("https://reelify-backend.onrender.com/api/v1/users/logout",{}, {withCredentials: true,})
+        console.log(response)
+        localStorage.removeItem("fullName")
+        localStorage.removeItem("coverImage")
+        localStorage.removeItem("avatar")
+        localStorage.removeItem("username")
+        localStorage.removeItem("email")
+        localStorage.removeItem("userId")
+        setLoggedIn(false)
+        
+        window.reload()
+
+      } catch (error) {
+          console.error(error)
+      }
+  }
+
+  useEffect(() => {
+
+    if (localStorage.getItem('username')) {
+      setLoggedIn(true)
+    }
+
+    if (isLoggedIn) {
+      setAvatar(userProfile)
+    }
+    else {
+      setAvatar("/assets/user.png")
+    }
+  },[userProfile,isLoggedIn])
+    
 
 
   return (
@@ -30,9 +72,9 @@ function Navbar() {
             className="text-primary border-2 border-secondary h-10 w-[36vw] rounded-3xl p-3 focus:outline-none" />
       </div>
       <div className="flex ml-auto items-center justify-center">
-            <button className="text-secondary border-highlight mr-5 cursor-pointer flex items-center" onClick={() => loginStatus()}>
-                <span className="mr-2 text-xl text-primary">Sign in</span>
-                <img className="h-8 w-8 mr-8" src="/assets/user.png"/>
+            <button className="text-secondary border-highlight mr-5 cursor-pointer flex items-center" onClick={() => isLoggedIn ? userLogOut() :  loginStatus()}>
+                <span className="mr-2 text-lg text-primary">{isLoggedIn ? 'LogOut' : 'Sign in'}</span>
+                <img className="h-8 w-8 mr-8 rounded-full" src={avatar}/>
             </button>
       </div>
     </div>
