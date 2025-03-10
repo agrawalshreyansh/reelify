@@ -23,7 +23,7 @@ function Navbar() {
 
     
       try {
-        const response = await axios.post("https://reelify-backend.onrender.com/api/v1/users/logout",{}, {withCredentials: true,})
+        const response = await axios.post("http://localhost:3000/api/v1/users/logout",{}, {withCredentials: true,})
         console.log(response)
         localStorage.removeItem("fullName")
         localStorage.removeItem("coverImage")
@@ -33,7 +33,7 @@ function Navbar() {
         localStorage.removeItem("userId")
         setLoggedIn(false)
         
-        window.reload()
+        navigate('/')
 
       } catch (error) {
           console.error(error)
