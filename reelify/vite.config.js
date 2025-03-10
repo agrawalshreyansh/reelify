@@ -1,12 +1,25 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+// import { defineConfig } from 'vite'
+// import react from '@vitejs/plugin-react'
+// import tailwindcss from '@tailwindcss/vite'
+
+
+// export default defineConfig({
+//   base: '/',
+//   plugins: [
+//     tailwindcss(),
+//     react()
+//   ],
+// })
+
+
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite'
 
-
 export default defineConfig({
-  base: '/',
-  plugins: [
-    tailwindcss(),
-    react()
-  ],
-})
+  plugins: [tailwindcss(),react()],
+  build: {
+    outDir: 'dist', // Default, ensure it's correct
+  },
+  base: "./", // Prevents broken paths on Vercel
+});
