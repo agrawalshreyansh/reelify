@@ -5,6 +5,7 @@ const UploadVideo = () => {
     const [formData, setFormData] = useState({});
     const [preview, setPreview] = useState({});
     const [uploading, setUploading] = useState(false);
+    const [error,setError] = useState(null)
 
     const handleFileChange = (e) => {
         const file = e.target.files[0];
@@ -27,7 +28,7 @@ const UploadVideo = () => {
         formDataToSend.append("description", formData.description || "");
         formDataToSend.append("videoFile", formData.video || null);
         formDataToSend.append("thumbnailFile", formData.thumbnail || null);
-
+        console.log(formDataToSend)
         setUploading(true);
         try {
             const response = await axios.post("https://reelify-backend.onrender.com/api/v1/videos/upload", formDataToSend, {
@@ -35,11 +36,10 @@ const UploadVideo = () => {
                 withCredentials: true
             });
             console.log(response.data);
-        } catch (error) {
-            console.log(error);
-        } finally {
-            setUploading(false);
-        }
+        } catch (error) {setUploading(false);
+            console.log(error.response.data.message);
+            setError(error.response.data.message)
+        } 
     };
 
     const username = localStorage.getItem('username')
@@ -86,12 +86,14 @@ const UploadVideo = () => {
                         {preview.thumbnail && <img src={preview.thumbnail} className="w-48 mt-2" />}
                     </div>
                 </div>
+                    {uploading && <div className="text-white text-center">Video Uploading</div>}
                 <div className="flex items-center justify-center">
-                    <button className="cursor-pointer w-[40%] text-primary bg-highlight rounded-3xl h-10 mt-8" onClick={uploadData}>
+                    <button className="cursor-pointer w-[40%] text-primary bg-highlight rounded-3xl h-10 mt-8" onClick={uploadData}
+                    disabled={uploading}>
                         Upload
                     </button>
-                    {uploading && <div className="text-white">Video Uploading</div>}
                 </div>
+                    <div className="text-center text-red-500">{error}</div>
             </div>
         </div>
     );

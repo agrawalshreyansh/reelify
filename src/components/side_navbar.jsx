@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
 function Sidebar() {
@@ -7,24 +7,24 @@ function Sidebar() {
     const navigate = useNavigate();
     
     // Extract active section from URL
-    const getActiveFromURL = () => {
+    const getActiveFromURL = useCallback(() => {
         const path = location.pathname;
         if (path === "/") return "Home";
         if (path === "/subscriptions") return "subs";
         if (path === "/SavedVideos") return "saved";
         if (path === "/watchHistory") return "videohistory";
         if (path === "/upload") return "upload";
-        if (path === "/mychannel") return "myvideos";
+        if (path === `/user/${localStorage.username}/videos`) return "myvideos";
         if (path === "/settings") return "settings";
         if (path === "/policy") return "Terms"
-        return "Home"; 
-    };
+        
+    },[location]);
 
     const [active, setActive] = useState(getActiveFromURL);
 
     useEffect(() => {
         setActive(getActiveFromURL());
-    }, [location.pathname]);
+    }, [getActiveFromURL]);
 
     return (
         <div className="flex flex-col text-primary w-[15vw] items-center h-[92vh] py-5">

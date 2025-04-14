@@ -12,6 +12,8 @@ const Listview = ({ showDesc, width, data }) => {
   const openVideo = (_id) => {
     navigate(`/playVideo/${_id}`)
   }
+  
+  
 
   return (
     <>
@@ -49,7 +51,7 @@ const Listview = ({ showDesc, width, data }) => {
                     src={videoData.owner.avatar}
                     className="w-4 h-4 rounded-2xl mx-2"
                   />
-                  <div className="text-secondary xl:text-base" onClick={openChannel(videoData.username)}>
+                  <div className="text-secondary xl:text-base" onClick={() => openChannel(videoData.username)}>
                     {videoData.owner.username}
                   </div>
                 </div>

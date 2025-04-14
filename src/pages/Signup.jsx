@@ -12,6 +12,8 @@ const SignUp = () => {
 
   const [isLoading, setLoading] = useState(false);
 
+  const [error,setError] = useState("")
+
   const [formData, setFormData] = useState({
     fullname: "",
     email: "",
@@ -55,23 +57,17 @@ const SignUp = () => {
         formDataToSend,
         {
           headers: { "Content-Type": "multipart/form-data" },
-          withCredentials: true, // Correct placement
+          withCredentials: true, 
         }
       )
-      .then((response) => {
-        localStorage.setItem("fullName", response.data.fullName);
-        localStorage.setItem("coverImage", response.data.coverImage);
-        localStorage.setItem("avatar", response.data.avatar);
-        localStorage.setItem("username", response.data.username);
-        localStorage.setItem("email", response.data.email);
-        localStorage.setItem("userId", response.data._id);
-        
+      .then(() => {
         navigate("/");
         setLoading(false)
       })
       .catch((error) => {
         if (error.response) {
           console.error("Server Error:", error.response.data);
+          setError(error.response.data.message)
         } else if (error.request) {
           console.error("No response received:", error.request);
         } else {
@@ -166,7 +162,7 @@ const SignUp = () => {
             </label>
             <input
               placeholder="Name"
-              type="password"
+              type={showPassword ? "text" : "password"}
               name="password"
               value={formData.password}
               onChange={handleChange}
@@ -190,7 +186,9 @@ const SignUp = () => {
               Login here
             </span>
           </div>
-          <div></div>
+          <div className="text-center text-red-500">
+              {error}
+          </div>
           {isLoading ? (
             <div className="flex items-center justify-center mt-8">
               <Loader />

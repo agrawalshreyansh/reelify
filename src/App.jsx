@@ -5,7 +5,6 @@ import StreamLayout from "./layouts/streamLayout";
 import Login from "./pages/login";
 import SignUp from "./pages/Signup";
 import SideLayout from "./layouts/sideLayout";
-import Homegrid from "./components/homeGrid";
 import SubscriptionGrid from "./components/subsgrid";
 import SavedVideosGrid from "./components/savedgrid";
 import WatchHistoryGrid from "./components/historygrid";
@@ -13,8 +12,24 @@ import MyVideoGrid from "./components/myvideogrid";
 import Settings from "./components/settings";
 import UploadVideo from "./components/uploadVideo";
 import TermsCondition from "./components/policies";
+import ChangePassword from "./components/forgotPassword";
+import Home from "./components/home";
+// import axios from 'axios';
+// import { useEffect } from "react";
 
 function App() {
+
+  // const RefreshAccessToken = async () => {
+    
+  //   await axios.post("http://localhost:3000/api/v1/users/refresh-token",{},{withCredentials:true})
+
+  // }
+
+  // useEffect(() => {
+  //     RefreshAccessToken()
+  // })
+
+
   return (
     <>
       <BrowserRouter>
@@ -24,7 +39,7 @@ function App() {
             path=""
             element={
               <SideLayout
-                Component={Homegrid}
+                Component={Home}
                 childComponent={{ showChannelName: true }}
               />
             }
@@ -64,6 +79,10 @@ function App() {
           <Route path="/playVideo/:id" element={<StreamLayout />} />
           <Route path="/signup" element={<SideLayout Component={SignUp} />} />
           <Route path="/login" element={<SideLayout Component={Login} />} />
+          <Route 
+            path="/changepassword"
+            element={<SideLayout Component={ChangePassword} />}
+          />
           <Route />
         </Routes>
       </BrowserRouter>

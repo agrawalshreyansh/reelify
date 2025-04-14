@@ -9,6 +9,7 @@ import Loader from "../components/loader";
 const StreamLayout = () => {
     
     const {id} = useParams()
+  
     const [data, setData] = useState({})
     const [isLoading,setLoading] = useState(false)
 
@@ -30,7 +31,6 @@ const StreamLayout = () => {
 
       try {
           const response = await axios.get(`https://reelify-backend.onrender.com/api/v1/videos/${id}/updateHistory`,{withCredentials:true})
-
           console.log(response)
 
       } catch (error) {
@@ -38,6 +38,30 @@ const StreamLayout = () => {
       }
 
 
+    }
+
+    const increaseLike = async (id) => {
+      console.log({id})
+
+      try {
+          const response = await axios.get(`https://reelify-backend.onrender.com/api/v1/videos/${id}/like`,{ withCredentials:true })
+          console.log(response)
+
+      } catch (error) {
+          console.log(error)
+      }
+    }
+
+    const increaseDislike = async (id) => {
+      console.log({id})
+
+      try {
+          const response = await axios.get(`https://reelify-backend.onrender.com/api/v1/videos/${id}/dislike`,{ withCredentials:true })
+          console.log(response)
+
+      } catch (error) {
+          console.log(error)
+      }
     }
     
     useEffect(() => { 
@@ -104,8 +128,15 @@ const StreamLayout = () => {
                       <div className="flex w-[20%] justify-between">
                           
                         <div className="flex justify-between w-[42%]">
-                          <button className="bg-secondary p-2 w-10 h-10 rounded-xl"><img src="../assets/like.png"/></button>
-                          <button className="bg-secondary p-2 w-10 h-10 rounded-xl rotate-180"><img src="../assets/like.png"/></button>
+                          <button className="bg-secondary p-2 w-18 h-10 rounded-xl flex" onClick={() => increaseLike(data._id)}>
+                            <img src="../assets/like.png"/>
+                            <p>{data.likeCount}</p>
+                          </button>
+                          <button className="bg-secondary p-2 w-18 h-10 rounded-xl flex" 
+                          onClick={() => increaseDislike(data._id)}>
+                            <img src="../assets/like.png" className="rotate-180"/>
+                            <p>{data.dislikeCount}</p>
+                          </button>
                         </div>
                         <div className="flex justify-between">
                           <button className="bg-secondary p-2 w-10 h-10 rounded-xl mr-4"><img src="../assets/share.png"/></button>

@@ -7,7 +7,7 @@ function Navbar() {
   const navigate = useNavigate()
 
   const loginStatus = () => {
-      navigate('/login')
+      navigate('/signup')
   }
 
   const goHome = () => {
@@ -73,7 +73,7 @@ function Navbar() {
       </div>
       <div className="flex ml-auto items-center justify-center">
             <button className="text-secondary border-highlight mr-5 cursor-pointer flex items-center" onClick={() => isLoggedIn ? userLogOut() :  loginStatus()}>
-                <span className="mr-2 text-lg text-primary">{isLoggedIn ? 'LogOut' : 'Sign in'}</span>
+                <span className="mr-2 text-lg text-primary">{isLoggedIn ? 'LogOut' : 'Sign Up'}</span>
                 <img className="h-8 w-8 mr-8 rounded-full" src={avatar}/>
             </button>
       </div>

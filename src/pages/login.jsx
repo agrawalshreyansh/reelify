@@ -7,6 +7,7 @@ const Login = () => {
 
     const navigate = useNavigate()
     const [isLoading, setLoading] = useState(false)
+    const [error,setError] = useState("")
 
     const showRegisterationForm = () => {
         navigate('/signup')
@@ -49,13 +50,10 @@ const Login = () => {
                 navigate('/');
             })
             .catch(error => {
+                
                 if (error.response) {
-                    console.error("Server Error:", error.response.data);
-                } else if (error.request) {
-                    console.error("No response received:", error.request);
-                } else {
-                    console.error("Request Setup Error:", error.message);
-                }
+                    setError(error.response.data.message)
+                } 
                 setLoading(false)
             });
            
@@ -70,9 +68,9 @@ const Login = () => {
             <div className="flex items-center justify-center flex-col w-[88vw] h-[100%]">
                 <div className="flex flex-col w-[36vw] px-16 py-20 my-6 mx-20 bg-white/10 shadow-lg shadow-[rgba(31,38,135,0.37)] backdrop-blur-[4.5px] rounded-[10px]  border border-white/18">
                     <div className="flex flex-col h-20 justify-center">
-                        <label htmlFor="fullname" className="text-white">Username / Email</label>
+                        <label htmlFor="fullname" className="text-white">Username</label>
                         <input
-                            placeholder="Email / username"
+                            placeholder="username"
                             type="text"
                             name="username"
                             className="border-2 border-primary text-white p-2 rounded-xl"
@@ -98,10 +96,10 @@ const Login = () => {
                             </button>
                         </div>
                     </div>
-
-                    <div className="text-primary ml-auto">
+                    <div className="text-primary ml-auto underline" onClick={() => navigate('/changepassword')}>
                         Forgot Password?
                     </div>
+                    <div className="text-red-600 text-center">{error}</div>
                     {isLoading ? <div className="flex items-center justify-center w-[100%] my-4"><Loader/></div> : 
                     <div className="text-primary bg-highlight rounded-3xl h-10 mt-8 flex items-center justify-center cursor-pointer">
                         <input type="submit" placeholder="Login" onClick={handleSubmit} className="cursor-pointer"/>

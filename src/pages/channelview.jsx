@@ -8,6 +8,7 @@ import {
   fetchChannelVideos,
 } from "../services/fetchChannelData";
 import Loader from "../components/loader";
+import axios from 'axios'
 
 const tabs = {
   videos: Homegrid,
@@ -25,13 +26,18 @@ const Channelview = () => {
 
   const [videosData, setVideosData] = useState([]);
 
+  const [isSubscribed,setSubscribed] = useState(false)
+
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       const data = await fetchChannelData(id);
       const videoarr = await fetchChannelVideos(id);
       setchannelData(data);
+      // videoarr.isArray 
+      
       setVideosData(videoarr);
+      setSubscribed(data.isSubscribed)
       setLoading(false);
     };
 
@@ -45,6 +51,21 @@ const Channelview = () => {
   }, [id, tab, navigate]);
 
   const MyComponent = tabs[active] || Homegrid;
+
+  const subscribeChannel = async () => {
+    try {
+        const response = await axios.post(`https://reelify-backend.onrender.com/api/v1/subscriptions/subscribeTo/${id}`,{}, {
+          withCredentials: true,
+      headers: {
+          "Content-Type": "application/json", 
+      },
+      })
+        setSubscribed(prev => !prev)
+    } catch (error) {
+        console.log(error)
+    }
+  }
+
 
   return (
     <div className="h-full">
@@ -80,8 +101,8 @@ const Channelview = () => {
           </div>
         </div>
         <div className="flex flex-col justify-end ml-auto mb-8">
-          <button className="bg-highlight text-primary py-2 px-6 rounded-xl text-xl mr-16 mb-10">
-            Subscribe
+          <button className={`cursor-pointer py-2 px-6 rounded-xl text-xl mr-16 mb-10 ${isSubscribed?'bg-stone-500 text-black' :'bg-highlight text-primary'}`} onClick={subscribeChannel}>
+            {isSubscribed ? 'Subscribed':'Subscribe'}
           </button>
         </div>
       </div>
