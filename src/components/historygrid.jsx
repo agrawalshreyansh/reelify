@@ -14,7 +14,7 @@ const WatchHistoryGrid = () => {
     const getUserWatchHistory = async () => {
         try {
             setLoading(true)
-            const response = await axios.get(`https://reelify-backend.onrender.com/api/v1/videos/history`,{withCredentials: true})
+            const response = await axios.get(`http://localhost:3000/api/v1/videos/history`,{withCredentials: true})
             console.log(response.data.data)
             setHistory(response.data.data)
             setLoading(false)
