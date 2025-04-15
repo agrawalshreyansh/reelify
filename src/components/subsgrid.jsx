@@ -27,12 +27,11 @@ const SubscriptionGrid = () => {
             const response = await axios.get('https://reelify-backend.onrender.com/api/v1/subscriptions/subscribedvideos', { withCredentials: true })
             console.log(response.data.data)
             setVideos(response.data.data)
+            setLoading(false)
 
         } catch (error) {
-            console.log(error)
-        }
-        finally {
             setLoading(false)
+            console.log(error)
         }
     }
 
