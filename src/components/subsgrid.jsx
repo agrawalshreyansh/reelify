@@ -16,10 +16,8 @@ const SubscriptionGrid = () => {
             setChannels(response.data.data.subscribedTo)
             setLoading(false)
         } catch (error) {
-            console.log(error)
-        }
-        finally {
             setLoading(false)
+            console.log(error)
         }
     }
 
