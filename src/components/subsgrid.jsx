@@ -8,6 +8,7 @@ const SubscriptionGrid = () => {
     const [channels, setChannels] = useState([])
     const [isLoading, setLoading] = useState(false)
     const [videos, setVideos] = useState([])
+    const [status,setStatus] = useState(0)
 
     const fetchSubscribedChannels = async () => {
         setLoading(true)
@@ -16,8 +17,8 @@ const SubscriptionGrid = () => {
             setChannels(response.data.data.subscribedTo)
             console.log(response.data.data)
         } catch (error) {
-            
-            console.log(error)
+            setStatus(error.response.status)
+            console.log(error.response.status)
         }
         finally {
             setLoading(false)
@@ -49,7 +50,7 @@ const SubscriptionGrid = () => {
         <>
             <div className="text-white">
                 {isLoading ? <Loader /> :
-                channels.length === 0 ? <div>Please Subscribe to Some Channels to see their content here !</div> :
+                channels.length === 0 ? status === 401 ? <div>Please Login First !</div> : <div>Please Subscribe to Some Channels to see their content here !</div> :
                     <div className="flex items-center py-4 overflow-x-auto scrollbar-hide [&::-webkit-scrollbar]:hidden mx-4 border-b-2 border-b-secondary">
                         
                           {  channels.map((channel) => {
