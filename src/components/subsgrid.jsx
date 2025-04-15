@@ -22,15 +22,15 @@ const SubscriptionGrid = () => {
     }
 
     const fetchSubscribedVideos = async () => {
-        setLoading(true)
+        
         try {
             const response = await axios.get('https://reelify-backend.onrender.com/api/v1/subscriptions/subscribedvideos', { withCredentials: true })
             console.log(response.data.data)
             setVideos(response.data.data)
-            setLoading(false)
+          
 
         } catch (error) {
-            setLoading(false)
+           
             console.log(error)
         }
     }
@@ -48,8 +48,8 @@ const SubscriptionGrid = () => {
                 {isLoading ? <Loader /> :
                 channels.length === 0 ? <div>Please Subscribe to Some Channels to see their content here !</div> :
                     <div className="flex items-center py-4 overflow-x-auto scrollbar-hide [&::-webkit-scrollbar]:hidden mx-4 border-b-2 border-b-secondary">
-                        {isLoading ? <Loader /> :
-                            channels.map((channel) => {
+                        
+                          {  channels.map((channel) => {
                                 return (
                                     <div className="h-32 w-24 flex flex-col justify-center items-center p-4 hover:bg-highlight cursor-pointer rounded-xl" key={channel._id}>
                                         <div className="rounded-full h-18 w-18 border-2 border-secondary">
@@ -59,7 +59,7 @@ const SubscriptionGrid = () => {
                                     </div>
                                 );
                             })
-                        }
+}
                     </div>
                 }
                 <div>
