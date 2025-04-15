@@ -19,12 +19,10 @@ const WatchHistoryGrid = () => {
             setHistory(response.data.data)
         } 
         catch (error) {
+            setLoading(false)
             console.log(error)
             setStatus(error.response.status)
             
-        }
-        finally {
-            setLoading(false)
         }
         
     }

@@ -12,7 +12,7 @@ const SubscriptionGrid = () => {
     const fetchSubscribedChannels = async () => {
         setLoading(true)
         try {
-            const response = await axios.get('http://localhost:3000/api/v1/subscriptions/mysubscriptions', { withCredentials: true })
+            const response = await axios.get('https://reelify-backend.onrender.com/api/v1/subscriptions/mysubscriptions', { withCredentials: true })
             setChannels(response.data.data.subscribedTo)
             setLoading(false)
         } catch (error) {
@@ -26,7 +26,7 @@ const SubscriptionGrid = () => {
     const fetchSubscribedVideos = async () => {
         setLoading(true)
         try {
-            const response = await axios.get('http://localhost:3000/api/v1/subscriptions/subscribedvideos', { withCredentials: true })
+            const response = await axios.get('https://reelify-backend.onrender.com/api/v1/subscriptions/subscribedvideos', { withCredentials: true })
             console.log(response.data.data)
             setVideos(response.data.data)
 

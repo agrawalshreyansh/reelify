@@ -4,6 +4,7 @@ import axios from "axios"
 export const fetchChannelData = async (id) => {
     try {
         const response = await axios.get(`https://reelify-backend.onrender.com/api/v1/users/user/${id}`,{withCredentials: true});
+        console.log(response.data.data)
         return response.data.data;  
     } catch (error) {
         

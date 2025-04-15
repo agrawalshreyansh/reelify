@@ -34,7 +34,7 @@ const Channelview = () => {
       const data = await fetchChannelData(id);
       const videoarr = await fetchChannelVideos(id);
       setchannelData(data);
-      // videoarr.isArray 
+      
       
       setVideosData(videoarr);
       setSubscribed(data.isSubscribed)
@@ -51,6 +51,7 @@ const Channelview = () => {
   }, [id, tab, navigate]);
 
   const MyComponent = tabs[active] || Homegrid;
+
 
   const subscribeChannel = async () => {
     try {
