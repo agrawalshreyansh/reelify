@@ -14,10 +14,13 @@ const SubscriptionGrid = () => {
         try {
             const response = await axios.get('https://reelify-backend.onrender.com/api/v1/subscriptions/mysubscriptions', { withCredentials: true })
             setChannels(response.data.data.subscribedTo)
-            setLoading(false)
+            console.log(response.data.data)
         } catch (error) {
-            setLoading(false)
+            
             console.log(error)
+        }
+        finally {
+            setLoading(false)
         }
     }
 
