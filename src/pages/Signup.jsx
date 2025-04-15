@@ -61,9 +61,9 @@ const SignUp = () => {
         }
       )
       .then(() => {
-        alert("Account creation successfull ! Please login to continue !")
-        navigate("/");
         setLoading(false)
+        navigate("/login");
+        alert("Account creation successfull ! Please login to continue !")
       })
       .catch((error) => {
         if (error.response) {
