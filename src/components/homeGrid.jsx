@@ -5,8 +5,6 @@ import PropTypes from "prop-types";
 
 function Homegrid({ showChannelName, videos }) {
 
-
-
   const navigate = useNavigate()
 
   const openChannel = (path) => {
@@ -17,7 +15,7 @@ function Homegrid({ showChannelName, videos }) {
     navigate(`/playVideo/${_id}`)
   }
 
-  console.log(videos)
+ 
 
   return (
     <>
@@ -26,9 +24,9 @@ function Homegrid({ showChannelName, videos }) {
 
           {videos.map((video) => {
             return (
-              <>
+              
 
-                <div className="text-white py-2 pb-2 cursor-pointer">
+                <div className="text-white py-2 pb-2 cursor-pointer" key={video._id}>
 
                   <div onClick={() => { openVideo(video._id) }} className='px-2.5 '>
                     <img src={video.thumbnail} className="h-42 w-76 rounded-2xl" />
@@ -57,7 +55,7 @@ function Homegrid({ showChannelName, videos }) {
                     </div>
                   </div>
                 </div>
-              </>
+              
             );
           })}
         </div>

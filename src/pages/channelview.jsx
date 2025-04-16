@@ -9,6 +9,7 @@ import {
 } from "../services/fetchChannelData";
 import Loader from "../components/loader";
 import axios from 'axios'
+import SubscribeButton from "../components/subscribeButton";
 
 const tabs = {
   videos: Homegrid,
@@ -101,10 +102,8 @@ const Channelview = () => {
             <span>{channelData.channelsSubscribedToCount} subscribed</span>
           </div>
         </div>
-        <div className="flex flex-col justify-end ml-auto mb-8">
-          <button className={`cursor-pointer py-2 px-6 rounded-xl text-xl mr-16 mb-10 ${isSubscribed?'bg-stone-500 text-black' :'bg-highlight text-primary'}`} onClick={subscribeChannel}>
-            {isSubscribed ? 'Subscribed':'Subscribe'}
-          </button>
+        <div className="flex flex-col justify-end ml-64 mb-8 p-0">
+          <SubscribeButton owner={channelData.username} subscribedStatus={channelData.isSubscribed}/>
         </div>
       </div>
           }

@@ -14,6 +14,7 @@ import UploadVideo from "./components/uploadVideo";
 import TermsCondition from "./components/policies";
 import ChangePassword from "./components/forgotPassword";
 import Home from "./components/home";
+import { ToastContainer, toast } from 'react-toastify';
 // import axios from 'axios';
 // import { useEffect } from "react";
 
@@ -31,7 +32,8 @@ function App() {
 
 
   return (
-    <>
+    <>    
+      <ToastContainer/>
       <BrowserRouter>
         <Navbar />
         <Routes>

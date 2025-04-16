@@ -1,10 +1,11 @@
 import Plyr from "plyr-react";
 import "plyr-react/plyr.css";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Listview from "./listView";
 import axios from "axios"
 import { useEffect, useState } from "react";
 import Loader from "../components/loader";
+import SubscribeButton from "../components/subscribeButton";
 
 const StreamLayout = () => {
     
@@ -12,14 +13,20 @@ const StreamLayout = () => {
   
     const [data, setData] = useState({})
     const [isLoading,setLoading] = useState(false)
-
+    const [subscribedStatus,setSubscribedStatus] = useState()
+    
+    
+    const navigate = useNavigate()
     
     const getVideoData = async ({id}) => {
       
       try {
-        const response = await axios.get(`https://reelify-backend.onrender.com/api/v1/videos/play/${id}`)
+        const response = await axios.get(`https://reelify-backend.onrender.com/api/v1/videos/play/${id}`,{withCredentials:true})
         setData(response.data.data)
-        console.log(response.data)
+        console.log(response.data.data)
+        setSubscribedStatus(response.data.data.isSubscribed)
+        
+  
         
       } catch (error) {
         console.log(error)
@@ -63,13 +70,20 @@ const StreamLayout = () => {
           console.log(error)
       }
     }
+
     
+    const fetchData = async () => {
+      await updateHistory({id})
+      await getVideoData({id})
+      
+      
+    }
+
+    
+   
     useEffect(() => { 
       setLoading(true)
-
-      getVideoData({id})
-      updateHistory({id})
-
+      fetchData()
       setLoading(false)
     } ,[id])
     
@@ -93,7 +107,7 @@ const StreamLayout = () => {
         speed: { selected: 1, options: [0.25 , 0.5, 1, 1.5, 2] }
     }
 
-    console.log(data)
+   
 
     return (
         <>
@@ -146,12 +160,12 @@ const StreamLayout = () => {
                     </div>
                     <div className="flex justify-between m-4">
                       <div className=" flex items-center ">
-                        <img src="../assets/avatar2.png" className="w-12 rounded-full border-2 border-primary"/>
-                        <div className="flex flex-col justify-center w-28 ml-4">
-                          <p className="text-lg">Damru</p>
-                          <p className="text-xs">100M subscribers</p>
+                        <img src={data.owner_image} className="w-12 h-12 rounded-full border-2 border-primary"/>
+                        <div className="flex flex-col justify-center w-28 ml-4 cursor-pointer" onClick={() => {navigate(`/user/${data.owner}/videos`)}}>
+                          <p className="text-lg">{data.owner}</p>
+                          <p className="text-xs">{data.subscribers}</p>
                         </div>
-                        <button className="bg-highlight text-primary px-4 py-2 rounded-xl ml-16">Subscribe</button>
+                          <SubscribeButton subscribedStatus={subscribedStatus} owner={data.owner}/>
                       </div>
                       <div>
                       </div>
