@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
 import Loader from "../components/loader";
+import { BASE_URL } from "../constants/constants.js";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -53,7 +54,7 @@ const SignUp = () => {
 
     axios
       .post(
-        "https://reelify-backend.onrender.com/api/v1/users/register",
+        `${BASE_URL}/api/v1/users/register`,
         formDataToSend,
         {
           headers: { "Content-Type": "multipart/form-data" },

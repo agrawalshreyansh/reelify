@@ -1,6 +1,7 @@
 import axios from "axios"
 import { useEffect,useState } from "react"
 import { toast } from "react-toastify"
+import {BASE_URL} from '../constants/constants.js'
 
 
 
@@ -11,7 +12,7 @@ const SubscribeButton = ({owner,subscribedStatus}) => {
 
     const subscribeChannel = async (id) => {
           try {
-              const response = await axios.post(`https://reelify-backend.onrender.com/api/v1/subscriptions/subscribeTo/${id}`,{}, {
+              const response = await axios.post(`${BASE_URL}/api/v1/subscriptions/subscribeTo/${id}`,{}, {
                 withCredentials: true,
             headers: {
                 "Content-Type": "application/json", 

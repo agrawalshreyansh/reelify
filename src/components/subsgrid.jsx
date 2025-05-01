@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Homegrid from "./homeGrid";
 import axios from 'axios';
 import Loader from './loader'
+import { BASE_URL } from "../constants/constants.js";
 
 const SubscriptionGrid = () => {
 
@@ -13,7 +14,7 @@ const SubscriptionGrid = () => {
     const fetchSubscribedChannels = async () => {
         setLoading(true)
         try {
-            const response = await axios.get('https://reelify-backend.onrender.com/api/v1/subscriptions/mysubscriptions', { withCredentials: true })
+            const response = await axios.get(`${BASE_URL}/api/v1/subscriptions/mysubscriptions`, { withCredentials: true })
             setChannels(response.data.data.subscribedTo)
             console.log(response.data.data)
         } catch (error) {
@@ -28,7 +29,7 @@ const SubscriptionGrid = () => {
     const fetchSubscribedVideos = async () => {
         
         try {
-            const response = await axios.get('https://reelify-backend.onrender.com/api/v1/subscriptions/subscribedvideos', { withCredentials: true })
+            const response = await axios.get(`${BASE_URL}/api/v1/subscriptions/subscribedvideos`, { withCredentials: true })
             console.log(response.data.data)
             setVideos(response.data.data)
           

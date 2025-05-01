@@ -8,9 +8,10 @@ const SideLayout  = ({Component, childComponent}) => {
     return (
         <>
             <div className="flex ">
-                
-                <Sidebar/>
-                <div className="w-[88vw] h-[92vh] overflow-x-hidden overflow-y-scroll [&::-webkit-scrollbar]:w-2
+                <div className="hidden sm:block">
+                    <Sidebar/>
+                </div>
+                <div className="sm:w-[88vw] h-[92vh] overflow-x-hidden overflow-y-scroll [&::-webkit-scrollbar]:w-2
                         [&::-webkit-scrollbar-track]:rounded-full
                         [&::-webkit-scrollbar-track]:bg-gray-100
                         [&::-webkit-scrollbar-thumb]:rounded-full

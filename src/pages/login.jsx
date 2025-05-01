@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import Loader from "../components/loader";
+import { BASE_URL } from "../constants/constants.js";
 
 const Login = () => {
 
@@ -32,7 +33,7 @@ const Login = () => {
 
         console.log(formDataToSend)
 
-        axios.post("https://reelify-backend.onrender.com/api/v1/users/login", formDataToSend,  {
+        axios.post(`${BASE_URL}/api/v1/users/login`, formDataToSend,  {
             withCredentials: true,
         headers: {
             "Content-Type": "application/json", 

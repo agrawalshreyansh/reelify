@@ -1,31 +1,30 @@
 import { useEffect, useState } from "react";
 import Homegrid from "./homeGrid";
-import axios from 'axios';
+import { FetchVideos } from "../services/fetchRandomVideos.js";
 
 const Home = ({showChannelName}) => {
 
     const [videos,setVideos] = useState([])
     const [error,setError] = useState(null)
 
-    const FetchVideos = async () => {
-
-        try {
-            const response = await axios.get("https://reelify-backend.onrender.com/api/v1/recommend/home")
-            setVideos(response.data.data)
-            
-        } catch (error) {
-            if (error.message) {
-                setError(error.message)
-                console.log(error.message)
-            }
-            else if (error.response){
-                console.log(error.response)
-            }
-        }
-    }
+    
 
     useEffect(() => {
-        FetchVideos()
+        const videos = async () => {
+
+            const v = await FetchVideos()
+      
+            if (Array.isArray(v)) {
+                console.log(v)
+                setVideos(v)
+            }
+            else {
+                setError(v)
+            }
+            
+        }
+        videos()
+
     },[])
 
     return (

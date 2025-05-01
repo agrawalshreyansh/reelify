@@ -2,6 +2,7 @@ import Listview from "../layouts/listView";
 import Loader from './loader'
 import { useEffect, useState } from "react";
 import axios from 'axios'
+import {BASE_URL} from '../constants/constants.js'
 
 const WatchHistoryGrid = () => {
 
@@ -14,7 +15,7 @@ const WatchHistoryGrid = () => {
     const getUserWatchHistory = async () => {
         try {
             setLoading(true)
-            const response = await axios.get(`https://reelify-backend.onrender.com/api/v1/videos/history`,{withCredentials: true})
+            const response = await axios.get(`${BASE_URL}/api/v1/videos/history`,{withCredentials: true})
             console.log(response.data.data)
             setHistory(response.data.data)
             setLoading(false)

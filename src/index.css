@@ -13,3 +13,7 @@ body {
     background-color: black;
     overflow: hidden;
 }
+
+.plyr__control {
+    color: #87e80a;  /* Your desired color */
+}

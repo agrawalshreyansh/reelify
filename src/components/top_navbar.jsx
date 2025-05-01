@@ -1,6 +1,7 @@
 import {  useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios"
+import { BASE_URL } from "../constants/constants";
 
 function Navbar() {
 
@@ -23,7 +24,7 @@ function Navbar() {
 
     
       try {
-        const response = await axios.post("https://reelify-backend.onrender.com/api/v1/users/logout",{}, {withCredentials: true,})
+        const response = await axios.post(`${BASE_URL}/api/v1/users/logout`,{}, {withCredentials: true,})
         console.log(response)
         localStorage.removeItem("fullName")
         localStorage.removeItem("coverImage")

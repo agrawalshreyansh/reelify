@@ -29,8 +29,8 @@ const Listview = ({ showDesc, width, data }) => {
               style={{ width }}
               key={videoData._id}
             >
-              <div className="w-[30%]" onClick={() => {openVideo(videoData._id)}}>
-                <img src={videoData.thumbnail} className="rounded-xl" />
+              <div className="w-[30%] h-[92%] " onClick={() => {openVideo(videoData._id)}}>
+                <img src={videoData.thumbnail} className="rounded-xl h-full object-cover" />
               </div>
               <div className="flex flex-col px-4 h-[100%] w-[75%] justify-center">
                 <div className="h-[20%] text-primary lg:text-xl xl:text-2xl">

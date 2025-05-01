@@ -1,5 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
+import { BASE_URL } from "../constants/constants.js";
+
 
 const UploadVideo = () => {
     const [formData, setFormData] = useState({});
@@ -31,7 +33,7 @@ const UploadVideo = () => {
         console.log(formDataToSend)
         setUploading(true);
         try {
-            const response = await axios.post("https://reelify-backend.onrender.com/api/v1/videos/upload", formDataToSend, {
+            const response = await axios.post(`${BASE_URL}/api/v1/videos/upload`, formDataToSend, {
                 headers: { "Content-Type": "multipart/form-data" },
                 withCredentials: true
             });
