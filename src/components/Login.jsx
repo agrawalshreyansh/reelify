@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
-import Modal from './modal';
-import Register from './register';
+import Modal from './Modal';
+import Register from './Register';
 import PasswordReset from './Resetpass';
 import { toast } from 'react-toastify';
 import UserContext from '../context/UserContext';

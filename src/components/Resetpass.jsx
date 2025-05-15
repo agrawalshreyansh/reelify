@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import Modal from './modal';
-import Register from './register';
+import Modal from './Modal';
+import Register from './Register';
 
 const PasswordReset = ({ open, setOpen }) => {
   const [email, setEmail] = useState('');

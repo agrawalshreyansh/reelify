@@ -1,6 +1,6 @@
 import React, { act, useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom';
-import Videocard from './videocard';
+import Videocard from './Videocard';
 import useFetchData from '../hooks/useFetchData';
 
 const ChannelTabs = () => {
