@@ -12,11 +12,13 @@ import Subscriptions from './pages/subscriptions.jsx';
 import { ToastContainer } from 'react-toastify';
 import React, { useEffect } from 'react';
 import useFetchData from './hooks/useFetchData.js';
-
+import UserContext from './context/UserContext';
+import { useContext } from 'react';
 
 function App() {
 
-  const { setUser, setIsLoggedIn} = UserProvider();
+const { setUser, setIsLoggedIn } = useContext(UserContext);
+
   const { statusCode, response, _, fetch } = useFetchData('users/authenticateStatus', true);
 
   useEffect(() => {
@@ -31,7 +33,7 @@ function App() {
     <>
       <div className='bg-bg'>
         <ToastContainer />
-        <UserProvider>
+        
           <BrowserRouter>
             <Navbar />
             <Routes>
@@ -44,7 +46,7 @@ function App() {
             </Routes>
 
           </BrowserRouter>
-        </UserProvider>
+        
       </div>
     </>
   )

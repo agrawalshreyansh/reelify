@@ -5,9 +5,8 @@ const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   
-  const storedUser = JSON.parse(localStorage.getItem('user')) || null;
-  const [user, setUser] = useState(storedUser);
-  const [isLoggedIn, setIsLoggedIn] = useState(!!storedUser);
+  const [user, setUser] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(null);
 
   return (
     <UserContext.Provider value={{ user, isLoggedIn, setUser, setIsLoggedIn }}>
