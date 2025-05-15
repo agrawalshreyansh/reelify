@@ -10,9 +10,22 @@ import Stream from './layouts/Stream.jsx';
 import Channel from './pages/channel.jsx';
 import Subscriptions from './pages/subscriptions.jsx';
 import { ToastContainer } from 'react-toastify';
+import React, { useEffect } from 'react';
+import useFetchData from './hooks/useFetchData.jsx';
 
 
 function App() {
+
+  const { setUser, setIsLoggedIn} = UserProvider();
+  const { statusCode, response, _, fetch } = useFetchData('users/authenticateStatus', true);
+
+  useEffect(() => {
+      fetch()
+      if (statusCode === 200) {
+        setUser(response);
+        setIsLoggedIn(true);
+      } 
+  }, []);
 
   return (
     <>
