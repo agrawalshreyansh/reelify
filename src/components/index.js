@@ -16,8 +16,8 @@ import StreamDetails from "./StreamDetails";
 import Switcher from "./Swtichers";
 import ChannelTabs from "./channelTabs";
 import Button from "./Button";
-import Loader from './Loader'
 import ChannelProfile from "./channelProfile";
+import Loader from "./Loader";
 
 
-export {Input,Logo,NavPages,Profile,Upload,Videocard,Modal,Register,PasswordReset,Login, UploadVideo, StreamChannelInfo, VideoPlayer, StreamRelatedVideo,StreamDetails, Switcher,ChannelTabs,Button,Loader, ChannelProfile }
+export {Input,Logo,NavPages,Profile,Upload,Videocard,Modal,Register,PasswordReset,Login, UploadVideo, StreamChannelInfo, VideoPlayer, StreamRelatedVideo,StreamDetails, Switcher,ChannelTabs,Button, ChannelProfile, Loader }
