@@ -11,7 +11,7 @@ import Channel from './pages/channel.jsx';
 import Subscriptions from './pages/subscriptions.jsx';
 import { ToastContainer } from 'react-toastify';
 import React, { useEffect } from 'react';
-import useFetchData from './hooks/useFetchData.jsx';
+import useFetchData from './hooks/useFetchData.js';
 
 
 function App() {
