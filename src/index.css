@@ -2,18 +2,12 @@
 
 @theme {
     --color-primary : #A7D129;
-    --color-secondary : #616F39;
-    --color-highlight : #3E432E ;
+    --color-secondary : #293638;
+    --color-ternary : #3d4f52;
+    --color-highlight : #def1f7 ;
+    --color-bg : #121717;
 }
+
 .plyr{
     border-radius:25px;
-}
-
-body {
-    background-color: black;
-    overflow: hidden;
-}
-
-.plyr__control {
-    color: #87e80a;  /* Your desired color */
 }
