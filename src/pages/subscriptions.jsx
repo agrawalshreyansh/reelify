@@ -12,6 +12,8 @@ const Subscriptions = () => {
 
   const { isLoggedIn } = useContext(UserContext);
 
+  console.log(isLoggedIn)
+
   const { statusCode, response, error,loading, fetch } = useFetchData('subscriptions/subscribedvideos', true);
 
   useEffect(() => {
