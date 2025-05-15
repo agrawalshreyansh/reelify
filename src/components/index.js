@@ -16,7 +16,7 @@ import StreamDetails from "./StreamDetails";
 import Switcher from "./Swtichers";
 import ChannelTabs from "./channelTabs";
 import Button from "./Button";
-import Loader from './Loader.jsx'
+import Loader from './Loader'
 import ChannelProfile from "./channelProfile";
 
 
