@@ -1,39 +1,33 @@
-
-import { Upload } from './components';
+// App.jsx
+import React, { useContext } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { CateogrizedVideo, Container, Navbar } from './layouts/index.js'
-import UploadVideo from './pages/uploadVideo.jsx';
+import { ToastContainer } from 'react-toastify';
 import { UserProvider } from './context/UserContext';
-import Videolist from './components/videolist.jsx';
+import { SearchProvider } from './context/SearchContext';
+import AuthInitializer from './components/Auth';
+import { CateogrizedVideo, Container, Navbar } from './layouts/index.js';
+import UploadVideo from './pages/uploadVideo.jsx';
 import History from './pages/history.jsx';
 import Stream from './layouts/Stream.jsx';
 import Channel from './pages/channel.jsx';
 import Subscriptions from './pages/subscriptions.jsx';
-import { ToastContainer } from 'react-toastify';
-import React, { useEffect } from 'react';
-import useFetchData from './hooks/useFetchData.js';
+import SearchResults from './pages/SearchResults.jsx';
 import UserContext from './context/UserContext';
-import { useContext } from 'react';
+import { Loader } from './components/index.js';
 
-function App() {
-
-const { setUser, setIsLoggedIn } = useContext(UserContext);
-
-  const { statusCode, response, _, fetch } = useFetchData('users/authenticateStatus', true);
-
-  useEffect(() => {
-      fetch()
-      if (statusCode === 200) {
-        setUser(response);
-        setIsLoggedIn(true);
-      } 
-  }, []);
+function AppContent() {
+  const { authLoading } = useContext(UserContext);
 
   return (
     <>
-      <div className='bg-bg'>
-        <ToastContainer />
-        
+      <ToastContainer />
+      <AuthInitializer />
+      {authLoading ? (
+        <div className="flex items-center justify-center h-screen bg-bg">
+          <Loader />
+        </div>
+      ) : (
+        <div className='bg-bg'>
           <BrowserRouter>
             <Navbar />
             <Routes>
@@ -42,14 +36,24 @@ const { setUser, setIsLoggedIn } = useContext(UserContext);
               <Route path='/history' element={<Container><History /></Container>} />
               <Route path='/channel/:username' element={<Container><Channel /></Container>} />
               <Route path='/subscriptions' element={<Container><Subscriptions /></Container>} />
+              <Route path='/search' element={<Container><SearchResults /></Container>} />
               <Route path='/stream/:id' element={<Stream />} />
             </Routes>
-
           </BrowserRouter>
-        
-      </div>
+        </div>
+      )}
     </>
-  )
+  );
 }
 
-export default App
+function App() {
+  return (
+    <UserProvider>
+      <SearchProvider>
+        <AppContent />
+      </SearchProvider>
+    </UserProvider>
+  );
+}
+
+export default App;

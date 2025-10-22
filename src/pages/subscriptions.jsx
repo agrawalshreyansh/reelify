@@ -10,22 +10,23 @@ import { Videocard } from '../components';
 
 const Subscriptions = () => {
 
-  const { isLoggedIn } = useContext(UserContext);
+  const { isLoggedIn, authLoading } = useContext(UserContext);
 
-  console.log(isLoggedIn)
 
-  const { statusCode, response, error,loading, fetch } = useFetchData('subscriptions/subscribedvideos', true);
+  const { response, loading, fetch } = useFetchData('subscriptions/subscribedvideos', true);
 
   useEffect(() => {
-    fetch();
-  }
-    , []);
+    if (isLoggedIn) {
+      fetch();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoggedIn]);
 
 
   return (
     <div>
       <h1 className='text-4xl my-4 mx-2'>Subscriptions</h1>
-      {loading ? <Loader/> : isLoggedIn ? <>
+      {(loading || authLoading) ? <Loader/> : isLoggedIn ? <>
         <SubscribedChannelList />
         <h2 className='text-2xl px-2 py-4'>New from your subscriptions</h2>
         <Videocard videos={response} />

@@ -1,9 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { Loader } from '../components';
-import { BASE_URL } from '../constants';
+import { BASE_URL, VIDEO_CATEGORIES_UPLOAD } from '../constants';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+import UserContext from '../context/UserContext';
 
 const UploadVideo = () => {
+    const navigate = useNavigate();
+    const { user } = useContext(UserContext);
+    
     const [video, setVideo] = useState(null);
     const [videoPreview, setVideoPreview] = useState(null);
     const [title, setTitle] = useState('');
@@ -42,7 +48,7 @@ const UploadVideo = () => {
         formData.append('thumbnailFile', thumbnail);
         setIsLoading(true);
         try {
-            const response = await axios.post(`${BASE_URL}`, formData, {
+            const response = await axios.post(`${BASE_URL}/videos/upload`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data', // Set to 'multipart/form-data'
                 },
@@ -51,9 +57,23 @@ const UploadVideo = () => {
 
             console.log('Video uploaded successfully:', response.data);
             setIsLoading(false);
+            
+            // Show success toast
+            toast.success('Video uploaded successfully!');
+            
+            // Redirect to user's channel
+            if (user?.username) {
+                navigate(`/channel/${user.username}`);
+            } else {
+                // Fallback to home if user data not available
+                navigate('/');
+            }
         } catch (error) {
             console.error('Error uploading video:', error.response || error.message);
             setIsLoading(false);
+            
+            // Show error toast
+            toast.error(error.response?.data?.message || 'Failed to upload video. Please try again.');
         }
     };
 
@@ -127,11 +147,11 @@ const UploadVideo = () => {
                             className="border rounded-lg p-3 w-full bg-secondary border-ternary focus:border-highlight focus:outline-none"
                         >
                             <option value="">Select Category</option>
-                            <option value="music">Music</option>
-                            <option value="podcast">Podcast</option>
-                            <option value="sports">Sports</option>
-                            <option value="cars">Cars</option>
-                            <option value="unboxing">Unboxing</option>
+                            {VIDEO_CATEGORIES_UPLOAD.map((cat) => (
+                                <option key={cat} value={cat.toLowerCase()}>
+                                    {cat}
+                                </option>
+                            ))}
                         </select>
                     </div>
 

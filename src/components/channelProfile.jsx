@@ -38,7 +38,7 @@ const ChannelProfile = () => {
 
   useEffect(() => {
     if (channelData) {
-      setIsSubscribed(channelData.isSubscribed)
+      setIsSubscribed(channelData?.isSubscribed || false)
     }
   }, [channelData])
 

@@ -29,15 +29,44 @@ const Login = ({ open, setOpen }) => {
 
   useEffect(() => {
     if (data) {
-      toast.success('Login Successful!');
-     
-      setUser(data.user);
-      setIsLoggedIn(true);
-      setOpen(false);
+      // Extract user data from the response
+      // API returns { status: ..., data: data.message } where data.message contains the user
+      let userData = null;
+      
+      if (data.data) {
+        // If data.data is an object with user property
+        if (data.data.user) {
+          userData = data.data.user;
+        } 
+        // If data.data itself is the user object
+        else if (data.data.username || data.data._id) {
+          userData = data.data;
+        }
+      } 
+      // Fallback: check if data itself has user info
+      else if (data.user) {
+        userData = data.user;
+      } 
+      else if (data.username || data._id) {
+        userData = data;
+      }
+      
+      if (userData) {
+        setUser(userData);
+        setIsLoggedIn(true);
+        toast.success('Login Successful!');
+        setOpen(false);
+        
+        // Reset form
+        setUsername('');
+        setPassword('');
+      } else {
+        setError('Failed to retrieve user data');
+      }
     } else if (err) {
       setError(err);
     }
-  }, [data, err]);
+  }, [data, err, setUser, setIsLoggedIn, setOpen]);
 
   return (
     <div>

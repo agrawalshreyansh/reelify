@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import Videolist from '../components/videolist'
 import UserContext from '../context/UserContext';
 import { useContext } from 'react';
@@ -10,21 +10,22 @@ import { Loader } from '../components';
 
 const History = () => {
 
-  const { user, isLoggedIn } = useContext(UserContext);
+  const { isLoggedIn, authLoading } = useContext(UserContext);
 
-  const { statusCode, response, error, loading, fetch } = useFetchData('videos/history', true);
+  const { response, loading, fetch } = useFetchData('videos/history', true);
   
   useEffect(() => {
     if (isLoggedIn) {
       fetch();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoggedIn]);
 
 
   return (
     <div className='mx-8'>
         <h1 className='text-3xl mx-4 my-8'>History</h1>
-        {loading ? <Loader/> : isLoggedIn ? 
+        {(loading || authLoading) ? <Loader/> : isLoggedIn ? 
           response &&  response.map((d) => <Videolist videoData={d} key={d._id}/> )
           :  <AskLogin/>
           }
