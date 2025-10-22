@@ -5,6 +5,7 @@ import PasswordReset from './Resetpass';
 import { toast } from 'react-toastify';
 import UserContext from '../context/UserContext';
 import usePostData from '../hooks/usePostData';
+import useFetchData from '../hooks/useFetchData';
 
 const Login = ({ open, setOpen }) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -15,7 +16,8 @@ const Login = ({ open, setOpen }) => {
   const [error, setError] = useState(null);
 
   const { setUser, setIsLoggedIn } = useContext(UserContext);
-  const { data, error: err, isLoading, postData } = usePostData('users/login',true);
+  const { data, error: err, isLoading, postData } = usePostData('users/login', true);
+  const { statusCode, response: userData, fetch: fetchUserData } = useFetchData('users/authenticateStatus', true);
 
   const togglePasswordVisibility = () => {
     setShowPassword(prev => !prev);
@@ -28,45 +30,27 @@ const Login = ({ open, setOpen }) => {
   };
 
   useEffect(() => {
-    if (data) {
-      // Extract user data from the response
-      // API returns { status: ..., data: data.message } where data.message contains the user
-      let userData = null;
-      
-      if (data.data) {
-        // If data.data is an object with user property
-        if (data.data.user) {
-          userData = data.data.user;
-        } 
-        // If data.data itself is the user object
-        else if (data.data.username || data.data._id) {
-          userData = data.data;
-        }
-      } 
-      // Fallback: check if data itself has user info
-      else if (data.user) {
-        userData = data.user;
-      } 
-      else if (data.username || data._id) {
-        userData = data;
-      }
-      
-      if (userData) {
-        setUser(userData);
-        setIsLoggedIn(true);
-        toast.success('Login Successful!');
-        setOpen(false);
-        
-        // Reset form
-        setUsername('');
-        setPassword('');
-      } else {
-        setError('Failed to retrieve user data');
-      }
+    if (data && data.status === 200) {
+      // Login successful, now fetch user data
+      fetchUserData();
     } else if (err) {
       setError(err);
     }
-  }, [data, err, setUser, setIsLoggedIn, setOpen]);
+  }, [data, err]);
+
+  useEffect(() => {
+    // When user data is fetched after successful login
+    if (statusCode === 200 && userData) {
+      setUser(userData);
+      setIsLoggedIn(true);
+      toast.success('Login Successful!');
+      setOpen(false);
+      
+      // Reset form
+      setUsername('');
+      setPassword('');
+    }
+  }, [statusCode, userData, setUser, setIsLoggedIn, setOpen]);
 
   return (
     <div>
