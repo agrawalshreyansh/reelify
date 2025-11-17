@@ -16,7 +16,6 @@ const Register = ({ open, setOpen }) => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [error, setError] = useState(null);
-  const [status, setStatus] = useState(null);
   const [loading, setLoading] = useState(false);
 
 
@@ -102,7 +101,7 @@ const Register = ({ open, setOpen }) => {
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
             <input
               type="text"
-              placeholder="Full Name"
+              placeholder="Full Name *"
               autoComplete="off"
               value={fullName}
               onChange={(e) => setFullName(e.target.value)}
@@ -110,7 +109,7 @@ const Register = ({ open, setOpen }) => {
             />
             <input
               type="text"
-              placeholder="Username"
+              placeholder="Username *"
               autoComplete="off"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
@@ -118,13 +117,14 @@ const Register = ({ open, setOpen }) => {
             />
             <input
               type="email"
-              placeholder="Email"
+              placeholder="Email *"
               autoComplete="off"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="border rounded-lg p-3 w-full bg-secondary border-ternary focus:border-highlight focus:outline-none"
             />
-            <div className="flex flex-col items-center gap-2">
+            <div className="flex flex-col gap-2">
+              <label>Avatar  *</label>
               <input
                 type="file"
                 accept="image/*"
@@ -140,6 +140,7 @@ const Register = ({ open, setOpen }) => {
               )}
             </div>
             <div className="flex flex-col gap-2">
+               <label>Cover Image</label>
               <input
                 type="file"
                 accept="image/*"
@@ -154,11 +155,10 @@ const Register = ({ open, setOpen }) => {
                 />
               )}
             </div>
-            {/* Password */}
             <div className="relative">
               <input
                 type={showPassword ? "text" : "password"}
-                placeholder="Password"
+                placeholder="Password *"
                 autoComplete="off"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -172,11 +172,10 @@ const Register = ({ open, setOpen }) => {
                 {showPassword ? "🙈" : "👁️"}
               </button>
             </div>
-            {/* Confirm Password */}
             <div className="relative">
               <input
                 type={showPassword ? "text" : "password"}
-                placeholder="Confirm Password"
+                placeholder="Confirm Password *"
                 autoComplete="off"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
