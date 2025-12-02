@@ -1,3 +1,5 @@
+Backend URL  --> https://reelify-backend.onrender.com
+
 # Reelify - Video Streaming Platform
 
 A modern, full-featured video streaming platform built with React, designed for users to upload, watch, and manage videos. Features include user authentication, video playback, subscriptions, search, and more.
