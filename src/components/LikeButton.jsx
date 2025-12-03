@@ -3,7 +3,7 @@ import { AiOutlineLike, AiOutlineDislike } from "react-icons/ai";
 import { FaDownload } from "react-icons/fa6";
 import { FaShareFromSquare } from "react-icons/fa6";
 import { motion, AnimatePresence } from "framer-motion";
-import useFetchData from "../hooks/useFetchData";
+import usePatchData from "../hooks/usePatchData";
 import { useParams } from "react-router-dom";
 
 const LikeDislikeButton = ({ initialLikes, initialDislikes }) => {
@@ -14,8 +14,8 @@ const LikeDislikeButton = ({ initialLikes, initialDislikes }) => {
     const [dislikes, setDislikes] = useState(initialDislikes);
     const { id } = useParams()
 
-    const { statusCode: likeStatus, response: likeResponse, fetch: IncreaseLikes } = useFetchData(`videos/${id}/like`, true);
-const { statusCode: dislikeStatus, response: dislikeResponse, fetch: IncreaseDislikes } = useFetchData(`videos/${id}/dislike`, true);
+    const { statusCode: likeStatus, response: likeResponse, fetch: IncreaseLikes } = usePatchData(`videos/${id}/like`, true);
+    const { statusCode: dislikeStatus, response: dislikeResponse, fetch: IncreaseDislikes } = usePatchData(`videos/${id}/dislike`, true);
 
 const handleLike = async () => {
   try {

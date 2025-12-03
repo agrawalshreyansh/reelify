@@ -2,13 +2,13 @@ import React from 'react'
 import { FormatDate } from '../utils/dateUtils'
 import { formatDuration } from '../utils/durationUtil';
 import { useNavigate } from 'react-router-dom'
-import usePostData from '../hooks/usePostData';
+import usePutData from '../hooks/usePutData';
 
 const Videolist = ({videoData}) => {
     
     const navigate = useNavigate()
 
-    const { data, error, isLoading, postData } = usePostData('users/deletehistory',true);
+    const { data, error, isLoading, putData: postData } = usePutData('users/deletehistory',true);
 
     const deleteVideo = async (id) => {
         postData({historyId : id})

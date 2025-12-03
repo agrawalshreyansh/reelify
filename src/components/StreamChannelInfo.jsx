@@ -1,6 +1,6 @@
 import React,{useEffect,useState} from 'react'
 import { toast } from 'react-toastify'
-import usePostData from '../hooks/usePostData'
+import usePutData from '../hooks/usePutData'
 import { Button } from './index'
 
 
@@ -8,7 +8,7 @@ const StreamChannelInfo = ({ owner, subscribers, owner_image, isSubscribed, desc
 
   const [subscribed, setSubscribed] = useState(false);
 
-  const { data, error: err, isLoading, postData } = usePostData(`subscriptions/subscribeTo/${owner}`, true)
+  const { data, error: err, isLoading, putData } = usePutData(`subscriptions/subscribeTo/${owner}`, true)
 
     useEffect(() => {
       if (data) {
@@ -46,7 +46,7 @@ const StreamChannelInfo = ({ owner, subscribers, owner_image, isSubscribed, desc
       <div>
       <Button status={subscribed}
               text={`${subscribed ? 'Subscribed' : 'Subscribe'}`}
-              cb={() => { postData(); }} />
+              cb={() => { putData(); }} />
       </div>
       <div className='w-full font-extralight text-sm'>
         <p>{description}</p>

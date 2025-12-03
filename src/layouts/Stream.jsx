@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { VideoPlayer, StreamChannelInfo, StreamRelatedVideo, StreamDetails } from '../components'
 import useFetchData from '../hooks/useFetchData'
+import usePatchData from '../hooks/usePatchData'
 import { useParams } from 'react-router-dom';
 import { title } from 'motion/react-client';
 
 const Stream = () => {
 
   const { id } = useParams()
-  const { x, y, z, fetch: history } = useFetchData(`videos/${id}/updateHistory`, true)
+  const { fetch: history } = usePatchData(`videos/${id}/updateHistory`, true)
 
   const [isLoading, setLoading] = useState(false)
   const [data, setData] = useState({})
